@@ -109,7 +109,7 @@ export const photos = {
   coachProfile: { src: '/images/coach-profile.jpg', alt: '테오짐 PT 청라점 김태오 대표 프로필 - TEO GYM 로고 앞에서', ratio: '3/4', label: '김태오 대표 프로필 (세로)' },
   coachLesson: { src: '/images/coach-lesson.jpg', alt: '김태오 대표가 상담 데스크에서 회원과 1:1 상담을 진행하는 모습', ratio: '4/3', label: '1:1 상담 장면' },
   appDashboard: { src: '/images/app-dashboard.jpg', alt: '테오짐 회원 전용 앱으로 수업 기록을 함께 확인하는 모습', ratio: '9/19', label: '회원 앱 사용 장면 (세로)' },
-  appRecords: { src: '/images/app-records.png', alt: '테오짐 회원 전용 앱 운동기록 화면 - 종목, 세트, 횟수, 중량, RPE 기록', ratio: '9/19', label: '회원 앱 운동기록 화면 (세로 스크린샷)' },
+  appRecords: { src: '/images/app-records.jpg', alt: '테오짐 회원 전용 앱 훈련 기록 상세 화면 - 종목별 세트, 중량, RPE, 부위별 자극도, 체중 변화 그래프와 트레이너 코멘트', ratio: '9/19', label: '회원 앱 훈련 기록 화면 (세로)' },
   postureSession: { src: '/images/posture-session.jpg', alt: '테오짐 청라 체형교정 PT - 김태오 대표가 회원의 움직임과 가동 범위를 평가하는 모습', ratio: '4/3', label: '움직임 평가 장면' },
   dietSession: { src: '/images/diet-session.jpg', alt: '테오짐 청라 1:1 PT 수업 - 랫풀다운 자세를 옆에서 직접 지도하는 모습', ratio: '4/3', label: '1:1 수업 지도 장면' },
   bulkSession: { src: '/images/bulk-session.jpg', alt: '테오짐 청라 벌크업 PT - 덤벨 숄더 프레스 중량 운동 장면', ratio: '4/3', label: '중량 운동 장면' },
