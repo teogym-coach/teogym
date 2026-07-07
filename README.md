@@ -38,6 +38,5 @@ npm run build
 
 ## 아직 남은 TODO (실제 값 발급/확인 후 입력)
 
-- **네이버 서치어드바이저 인증**: https://searchadvisor.naver.com 에서 사이트 등록 → HTML 태그 방식 인증값 발급 → `app/seo.ts`의 `NAVER_SITE_VERIFICATION`에 입력
 - **매장 좌표(geo)**: 네이버지도/구글지도에서 정확한 위도·경도 확인 → `app/layout.tsx`의 `geo` 주석 해제 후 입력
 - **실제 사진**: 위 "사진 교체 방법" 참고
