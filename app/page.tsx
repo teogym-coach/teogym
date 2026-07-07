@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps } from './components';
 import { faqs, photos, site } from './content';
 import { faqSchema } from './schema';
@@ -34,29 +35,29 @@ export default function Home() {
 
     {/* Hero — 밝은 센터 전경이 화면 전체 배경으로 깔리는 프리미엄 히어로 */}
     <section className="relative overflow-hidden">
-      {/* 아주 미세한 슬로우 줌(3%, 8초) — 흐림 없이 애플 수준의 절제된 움직임. object-position 50% 40%: 로고와 공간이 중심 */}
+      {/* 시안 기준 크롭(오른쪽 20% 제거, 로고 64% 지점) + 미세 슬로우 줌. PC는 로고·렉이 보이는 상단 밴드, 모바일은 로고가 들어오는 58% 지점 */}
       <img
         src={photos.heroStudio.src}
         alt={photos.heroStudio.alt}
         loading="eager"
         fetchPriority="high"
-        className="hero-zoom absolute inset-0 h-full w-full object-cover object-[50%_34%]"
+        className="hero-zoom absolute inset-0 h-full w-full object-cover object-[58%_center] md:object-[50%_28%]"
       />
-      {/* 데스크톱: 텍스트가 자기 공간을 갖도록 흰 영역을 ~42%까지 유지하고, 이후 자연광처럼 긴 페더로 사진에 녹아드는 그라데이션 */}
-      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.97) 0%, rgba(248,244,238,0.95) 18%, rgba(248,244,238,0.90) 32%, rgba(248,244,238,0.82) 42%, rgba(248,244,238,0.64) 50%, rgba(248,244,238,0.45) 58%, rgba(248,244,238,0.28) 66%, rgba(248,244,238,0.14) 74%, rgba(248,244,238,0.06) 82%, rgba(248,244,238,0.02) 90%, rgba(248,244,238,0) 100%)' }} />
-      {/* 모바일: 텍스트 구간은 밝게 유지하되 오버레이를 약 12% 줄여 사진이 더 드러나게 */}
-      <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(248,244,238,0.96) 0%, rgba(248,244,238,0.90) 45%, rgba(248,244,238,0.45) 75%, rgba(248,244,238,0.12) 100%)' }} />
-      <div className="relative mx-auto flex min-h-[540px] max-w-6xl items-center px-4 pb-20 pt-16 md:min-h-[760px] md:px-10 md:pb-36 md:pt-24">
+      {/* 데스크톱(시안 기준): 왼쪽 ~28%만 확실히 밝게, 이후 짧고 부드러운 페더로 사진이 넓게 드러나는 그라데이션 */}
+      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.97) 0%, rgba(248,244,238,0.93) 16%, rgba(248,244,238,0.80) 28%, rgba(248,244,238,0.55) 38%, rgba(248,244,238,0.30) 48%, rgba(248,244,238,0.12) 58%, rgba(248,244,238,0.03) 66%, rgba(248,244,238,0) 74%)' }} />
+      {/* 모바일: 텍스트 가독성을 유지하며 오버레이를 아주 약간만 완화 */}
+      <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(248,244,238,0.95) 0%, rgba(248,244,238,0.88) 45%, rgba(248,244,238,0.40) 75%, rgba(248,244,238,0.10) 100%)' }} />
+      <div className="relative mx-auto flex min-h-[540px] max-w-6xl items-center px-4 pb-20 pt-16 md:min-h-[680px] md:px-10 md:pb-36 md:pt-20">
         <div>
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent-deep">청라 프리미엄 1:1 PT 스튜디오</p>
-            <h1 className="mt-6 max-w-[520px] text-[34px] font-extrabold leading-[1.3] tracking-tight text-ink md:mt-7 md:max-w-[640px] md:text-6xl md:leading-[1.25] lg:text-7xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
-            <p className="mt-6 max-w-[480px] text-lg leading-9 text-ink-soft md:mt-8">체형교정 · 다이어트 · 벌크업<br />대표가 직접 평가하고 운동기록과 변화를 끝까지 관리합니다.</p>
+            <h1 className="max-w-[520px] text-[34px] font-bold leading-[1.3] tracking-tight text-ink md:max-w-[600px] md:text-5xl md:leading-[1.35] lg:text-6xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
+            <p className="mt-6 text-lg font-medium text-ink md:mt-8">체형교정 · 다이어트 · 벌크업</p>
+            <p className="mt-4 max-w-[440px] text-base leading-7 text-ink-soft">대표가 직접 평가하고<br />운동기록과 변화를 끝까지 관리합니다.</p>
           </Reveal>
           <Reveal delay={150}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row md:mt-10">
-              <Button href={site.links.reservation}>무료 상담 예약</Button>
-              <Button href="/app/" variant="outline">회원앱 둘러보기</Button>
+              <a href={site.links.reservation} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md bg-accent px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-accent-deep">무료 상담 예약</a>
+              <Link href="/app/" className="inline-flex items-center justify-center rounded-md border border-line bg-white/90 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-accent/40 hover:text-accent-deep">회원앱 둘러보기</Link>
             </div>
           </Reveal>
         </div>
