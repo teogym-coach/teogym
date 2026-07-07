@@ -31,7 +31,7 @@ npm run build
 ## 사진 교체 방법
 
 1. `app/content.ts`의 `photos` 매니페스트에서 파일명·비율·alt를 확인합니다.
-   (예: `/images/hero-studio.jpg`, 비율 16:11)
+   (예: `/images/teogym-main-hero.jpg`, 비율 16:11 — 메인 히어로는 적용 완료)
 2. 같은 파일명으로 `public/images/`에 사진을 넣습니다. 매니페스트의 비율에 맞춰 잘라두면 가장 좋습니다.
 3. `npm run build` 후 배포하면 placeholder가 자동으로 실제 사진으로 교체됩니다. 레이아웃 수정이 필요 없습니다.
 4. 웹 업로드 전 사진은 가로 1600px 이하, 200~400KB 수준으로 압축하는 것을 권장합니다 (정적 export라 자동 최적화가 없음).

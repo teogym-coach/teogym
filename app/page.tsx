@@ -1,7 +1,19 @@
 import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps } from './components';
 import { faqs, photos, site } from './content';
 import { faqSchema } from './schema';
-import { CountUp, Reveal } from './ui';
+import { Reveal } from './ui';
+
+// 히어로 하단 feature 카드용 골드 라인 아이콘
+function FeatureIcon({ name }: { name: string }) {
+  const paths: Record<string, React.ReactNode> = {
+    clipboard: <><rect x="5" y="4" width="14" height="17" rx="2" /><path d="M9 4.5V3h6v1.5" /><path d="m9 13 2 2 4-4" /></>,
+    chart: <><path d="M4 19h16" /><path d="M7 16v-4" /><path d="M12 16V9" /><path d="M17 16V5" /></>,
+    chat: <><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5Z" /><path d="M9 12h.01M13 12h.01M17 12h.01" /></>,
+    user: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></>,
+    shield: <><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></>,
+  };
+  return <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7 shrink-0 text-accent">{paths[name]}</svg>;
+}
 
 const programs = [
   { title: '체형교정 PT', desc: '불편한 몸을 편하게, 흐트러진 움직임을 균형 있게. 자세와 근력 불균형을 함께 확인합니다.', href: '/posture/' },
@@ -20,37 +32,52 @@ export default function Home() {
   return <main>
     <JsonLd data={faqSchema(faqs.home)} />
 
-    {/* Hero */}
-    <section className="border-b border-line bg-sand">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 md:grid-cols-[1.05fr_.95fr] md:py-28">
+    {/* Hero — 밝은 센터 전경이 화면 전체 배경으로 깔리는 프리미엄 히어로 */}
+    <section className="relative">
+      <img
+        src={photos.heroStudio.src}
+        alt={photos.heroStudio.alt}
+        loading="eager"
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full object-cover object-center md:object-[54%_35%]"
+      />
+      {/* 데스크톱: 텍스트 뒤만 밝게 — 오버레이 폭을 줄여 사진이 더 일찍, 더 선명하게 드러나는 그라데이션 */}
+      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.96) 0%, rgba(248,244,238,0.88) 24%, rgba(248,244,238,0.55) 38%, rgba(248,244,238,0.18) 52%, rgba(248,244,238,0.04) 64%, rgba(248,244,238,0) 100%)' }} />
+      {/* 모바일: 텍스트 가독성 우선 — 상단은 진하게, 하단은 사진이 선명하게 */}
+      <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(248,244,238,0.98) 0%, rgba(248,244,238,0.94) 48%, rgba(248,244,238,0.55) 78%, rgba(248,244,238,0.25) 100%)' }} />
+      <div className="relative mx-auto flex min-h-[600px] max-w-6xl items-center px-4 pb-28 pt-20 md:min-h-[760px] md:px-10 md:pb-36 md:pt-24">
         <Reveal>
-          <p className="text-sm font-bold tracking-wide text-accent">청라 프리미엄 1:1 PT 스튜디오</p>
-          <h1 className="mt-5 text-4xl font-extrabold leading-[1.2] text-ink md:text-6xl">몸을 기록하고,<br />관리하는 곳</h1>
-          <p className="mt-7 max-w-xl text-lg leading-8 text-ink-soft">청라에서 체형교정, 다이어트, 벌크업을 함께 관리합니다. 대표가 직접 수업하고 운동기록과 체중 변화를 끝까지 관리합니다.</p>
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent-deep">청라 프리미엄 1:1 PT 스튜디오</p>
+          <h1 className="mt-6 max-w-[520px] text-4xl font-bold leading-[1.25] tracking-tight text-ink md:max-w-[640px] md:text-6xl lg:text-7xl">기록이 만든 변화,<br />테오짐은 다릅니다</h1>
+          <p className="mt-7 max-w-[520px] text-lg leading-8 text-ink-soft">정확한 평가, 체계적인 기록, 꾸준한 피드백으로<br className="hidden sm:block" /> 몸의 변화를 끝까지 관리합니다.</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button href={site.links.reservation}>무료 체험 상담 예약</Button>
             <Button href="/records/" variant="outline">운동기록 관리 보기</Button>
           </div>
         </Reveal>
-        <Reveal delay={150}><Photo spec={photos.heroStudio} priority /></Reveal>
       </div>
     </section>
 
-    {/* 숫자로 보는 테오짐 */}
-    <Section>
-      <div className="grid gap-4 sm:grid-cols-3">
-        {[
-          { value: <span>1:1</span>, label: '대표가 직접, 담당 교체 없는 전담 수업' },
-          { value: <CountUp end={5} suffix="가지" />, label: '매 수업 남기는 기본 기록 — 종목·세트·횟수·중량·RPE' },
-          { value: <CountUp end={6} suffix="일" />, label: '주간 운영 — 평일 10~22시 · 토 10~15시' },
-        ].map(({ value, label }, i) => <Reveal key={label} delay={i * 100}>
-          <div className="rounded-2xl border border-line bg-card p-7 text-center shadow-card">
-            <p className="text-3xl font-extrabold text-accent-deep md:text-4xl">{value}</p>
-            <p className="mt-3 text-sm leading-6 text-ink-soft">{label}</p>
-          </div>
-        </Reveal>)}
-      </div>
-    </Section>
+    {/* Floating feature card — 히어로 하단에 떠 있는 흰색 카드 바 (부드러운 그림자) */}
+    <section className="relative z-10 mx-auto -mt-20 max-w-6xl px-4 md:-mt-24">
+      <Reveal>
+        <div className="grid grid-cols-1 divide-y divide-line rounded-2xl border border-line bg-card shadow-card lg:grid-cols-5 lg:divide-x lg:divide-y-0">
+          {[
+            { icon: 'clipboard', title: '정확한 평가', desc: '체형·움직임·체성분을 먼저 확인' },
+            { icon: 'chart', title: '기록 기반 관리', desc: '운동·식단·컨디션 모든 과정을 기록' },
+            { icon: 'chat', title: '맞춤 피드백', desc: '기록을 바탕으로 꼼꼼한 피드백' },
+            { icon: 'user', title: '1:1 프라이빗', desc: '대표가 직접 지도하는 맞춤 수업' },
+            { icon: 'shield', title: '지속 가능한 변화', desc: '단기 변화가 아닌 평생 가는 습관' },
+          ].map(({ icon, title, desc }) => <div key={title} className="flex items-start gap-4 p-6 lg:flex-col lg:gap-3">
+            <FeatureIcon name={icon} />
+            <div>
+              <h3 className="text-[15px] font-bold text-ink">{title}</h3>
+              <p className="mt-1 text-xs leading-5 text-ink-soft">{desc}</p>
+            </div>
+          </div>)}
+        </div>
+      </Reveal>
+    </section>
 
     {/* 프로그램 */}
     <Section tone="sand">

@@ -169,18 +169,24 @@ export function RelatedLinks({ items }: { items: readonly { title: string; desc:
 // public/images/에 매니페스트(content.ts의 photos)와 같은 파일명으로 사진을 넣고
 // 빌드하면 자동으로 실제 사진이 표시됩니다. 파일이 없으면 같은 비율의
 // placeholder가 렌더링되어 교체 시 레이아웃이 밀리지 않습니다.
-export function Photo({ spec, priority = false, className = '' }: { spec: PhotoSpec; priority?: boolean; className?: string }) {
+export function Photo({ spec, priority = false, overlay = false, className = '' }: { spec: PhotoSpec; priority?: boolean; overlay?: boolean; className?: string }) {
   const exists = fs.existsSync(path.join(process.cwd(), 'public', spec.src));
 
   if (exists) {
-    return <img
+    const img = <img
       src={spec.src}
       alt={spec.alt}
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : undefined}
       className={`w-full rounded-3xl border border-line object-cover shadow-card ${className}`}
-      style={{ aspectRatio: spec.ratio }}
+      style={{ aspectRatio: spec.ratio, objectPosition: 'center center' }}
     />;
+    if (!overlay) return img;
+    // 히어로 등 텍스트 인접 영역용: 밝고 따뜻한 톤을 유지하는 옅은 warm white 그라데이션.
+    return <div className="relative">
+      {img}
+      <div aria-hidden className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-r from-bg/40 via-transparent to-transparent" />
+    </div>;
   }
 
   return <div
