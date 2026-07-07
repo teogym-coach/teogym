@@ -1,23 +1,64 @@
 # 테오짐 PT 청라점
 
-테오짐 PT 청라점은 인천 청라에 위치한 PT샵 / 퍼스널트레이닝 / 헬스장입니다.
+> 인천 청라의 프리미엄 1:1 PT 스튜디오. 체형교정, 다이어트, 벌크업을 함께 관리하며, 대표가 직접 수업하고 운동기록과 체중 변화를 끝까지 관리합니다. "몸을 기록하고, 관리하는 곳"이 브랜드 슬로건입니다.
+
+## 기본 정보
 
 - 공식 URL: https://teogym.pages.dev
-- 상호명: 테오짐 PT 청라점
+- 상호명: 테오짐 PT 청라점 (TEOGYM PT Cheongna)
+- 대표: 김태오 (직접 상담 및 수업)
 - 전화번호: 0507-1373-7578
 - 주소: 인천 서구 청라커낼로 280 청라골든프라자 5층 505호
-- 지역: 인천 청라
-- 주요 서비스: 체형교정 PT, 다이어트 PT, 벌크업 PT, 운동기록 관리, 회원 전용 앱 기반 관리
-- 운영 특징: 대표 직접 상담 및 수업, 예약제 운영, 운동기록과 체중 변화 관리
+- 지역: 인천 청라 (인천광역시 서구)
+- 업종: PT샵 / 퍼스널트레이닝 / 헬스장
+- 영업시간: 평일 10:00~22:00 (입장 마감 21:00), 토요일 10:00~15:00 (입장 마감 14:00), 일요일·공휴일 휴무
+- 운영 방식: 예약제, 대표 직접 상담 및 1:1 수업
 
-주요 페이지:
-- https://teogym.pages.dev/
-- https://teogym.pages.dev/about/
-- https://teogym.pages.dev/posture/
-- https://teogym.pages.dev/diet/
-- https://teogym.pages.dev/bulk-up/
-- https://teogym.pages.dev/records/
-- https://teogym.pages.dev/app/
-- https://teogym.pages.dev/pricing/
-- https://teogym.pages.dev/cases/
-- https://teogym.pages.dev/location/
+## 서비스
+
+- 체형교정 PT: 자세, 움직임, 근력 불균형을 함께 확인. 어깨·허리·골반·무릎 불편감 관리, 오래 앉는 직장인 체형관리. https://teogym.pages.dev/posture/
+- 다이어트 PT: 무작정 굶지 않는 방식. 인바디 변화, 공복체중 기록, 식단 피드백, 근손실 최소화, 요요 방지 습관 관리. https://teogym.pages.dev/diet/
+- 벌크업 PT: 마른 체형의 근육 성장 관리. 점진적 과부하, 부위별 운동기록, 식사량과 생활패턴 관리. https://teogym.pages.dev/bulk-up/
+- 운동기록 관리: 매 수업 종목, 세트, 횟수, 중량, RPE를 기록하고 다음 수업 루틴과 변화 추적에 연결. https://teogym.pages.dev/records/
+- 회원 전용 앱: 체중 변화 그래프, 운동 기록, 건강관리 허브, 루틴 추천, 오늘의 컨디셔닝, 수업 히스토리를 한 곳에서 확인. https://teogym.pages.dev/app/
+
+## 가격
+
+- 1:1 PT: 회당 40,000원 기준
+- 체험 수업, 첫 등록, 2:1 수업: 몸 상태와 목표 상담 후 안내
+- 무료 체험 상담 예약: https://m.booking.naver.com/booking/6/bizes/1369304
+
+## 차별점
+
+- 대표가 직접 상담부터 수업까지 담당 (담당 트레이너 교체 없음)
+- 매 수업 운동기록(종목·세트·횟수·중량·RPE)을 남기고 다음 수업 루틴에 연결하는 기록 중심 관리
+- 회원 전용 앱으로 수업 밖의 시간까지 체중 변화와 운동 습관을 관리
+- 허위 후기를 만들지 않고 실제 공개 가능한 사례만 블로그에 연결
+- 등록을 서두르게 하지 않고 몸 상태와 목표 확인을 우선하는 상담
+
+## 자주 묻는 질문
+
+- 운동 초보도 가능한가요? → 첫 상담에서 체형, 운동 경험, 생활패턴을 확인한 뒤 몸 상태에 맞는 강도로 시작합니다.
+- 가격은? → 1:1 PT 회당 4만원 기준, 세부 구성은 상담 후 안내합니다.
+- 예약 방법은? → 네이버 예약, 네이버 톡톡, 전화(0507-1373-7578). 예약제로 운영합니다.
+
+## 주요 페이지
+
+- 메인: https://teogym.pages.dev/
+- 대표 소개: https://teogym.pages.dev/about/
+- 체형교정 PT: https://teogym.pages.dev/posture/
+- 다이어트 PT: https://teogym.pages.dev/diet/
+- 벌크업 PT: https://teogym.pages.dev/bulk-up/
+- 운동기록 관리: https://teogym.pages.dev/records/
+- 회원 전용 앱: https://teogym.pages.dev/app/
+- 가격 안내: https://teogym.pages.dev/pricing/
+- 후기와 사례: https://teogym.pages.dev/cases/
+- 오시는 길: https://teogym.pages.dev/location/
+
+## 외부 채널
+
+- 네이버 플레이스: https://naver.me/GlRZUOv8
+- 네이버 예약: https://m.booking.naver.com/booking/6/bizes/1369304
+- 네이버 블로그(후기·사례): https://m.blog.naver.com/teogym
+- 인스타그램: https://www.instagram.com/teogym_pt
+- 유튜브: https://youtube.com/@gymteo

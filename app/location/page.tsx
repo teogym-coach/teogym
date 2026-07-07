@@ -1,3 +1,59 @@
-import { Button, CTA, Card, PageHero } from '../components'; import { makeMetadata } from '../seo'; import { pageMeta, site } from '../content';
+import { Button, Card, CTA, FaqList, JsonLd, PageHero, Photo, Section, SectionTitle } from '../components';
+import { faqs, pageMeta, photos, site } from '../content';
+import { breadcrumbSchema, faqSchema } from '../schema';
+import { makeMetadata } from '../seo';
+import { Reveal } from '../ui';
+
 export const metadata = makeMetadata(pageMeta.location);
-export default function Page(){return <main><PageHero eyebrow="오시는 길" title="테오짐 PT 청라점" desc="인천 서구 청라 지역 PT샵입니다. 예약제로 운영하며 정확한 위치와 상담 가능 시간은 네이버 채널에서 확인해주세요."/><section className="mx-auto grid max-w-6xl gap-4 px-4 pb-16 md:grid-cols-2"><Card title="방문 안내"><p>인천 서구 청라 지역 PT샵 · 예약제 운영 · 대표 직접 상담</p></Card><Card title="바로가기"><div className="flex flex-col gap-3"><Button href={site.links.place}>네이버 플레이스 보기</Button><Button href={site.links.reservation}>네이버 예약 링크</Button><Button href={site.links.talk}>네이버 톡톡</Button><Button href={site.links.blog}>블로그 링크</Button><Button href={site.links.instagram}>인스타그램</Button><Button href={site.links.youtube}>유튜브</Button><Button href={site.links.phone}>전화 상담</Button></div></Card></section><CTA/></main>}
+
+export default function Page() {
+  return <main>
+    <JsonLd data={breadcrumbSchema([{ name: '홈', path: '/' }, { name: '오시는 길', path: pageMeta.location.path }])} />
+    <JsonLd data={faqSchema(faqs.location)} />
+
+    <PageHero crumb="오시는 길" eyebrow="오시는 길" title="테오짐 PT 청라점" desc={`${site.address}. 예약제로 운영하며 방문 전 네이버 예약 또는 전화로 시간을 확인해주세요.`} />
+
+    <Section>
+      <div className="grid items-start gap-12 md:grid-cols-2">
+        <Reveal>
+          <SectionTitle eyebrow="Visit" title="방문 안내" />
+          <div className="mt-8 grid gap-4">
+            <Card title="주소">
+              <p>{site.address}</p>
+            </Card>
+            <Card title="영업시간">
+              <ul className="space-y-1">
+                <li>{site.hours.weekday.label} {site.hours.weekday.open} ~ {site.hours.weekday.close} (입장 마감 {site.hours.weekday.lastEntry})</li>
+                <li>{site.hours.saturday.label} {site.hours.saturday.open} ~ {site.hours.saturday.close} (입장 마감 {site.hours.saturday.lastEntry})</li>
+                <li>{site.hours.closed}</li>
+              </ul>
+              <p className="mt-3 text-sm">{site.hours.note}</p>
+            </Card>
+            <Card title="연락처">
+              <p>전화 {site.telephone}</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Button href={site.links.place} variant="outline">네이버 플레이스</Button>
+                <Button href={site.links.reservation} variant="outline">네이버 예약</Button>
+                <Button href={site.links.talk} variant="outline">네이버 톡톡</Button>
+                <Button href={site.links.phone} variant="outline">전화 상담</Button>
+              </div>
+            </Card>
+          </div>
+        </Reveal>
+        <Reveal delay={150}>
+          <Photo spec={photos.locationMap} />
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Button href={site.links.directions}>네이버 지도에서 길찾기</Button>
+          </div>
+        </Reveal>
+      </div>
+    </Section>
+
+    <Section tone="sand">
+      <SectionTitle eyebrow="FAQ" title="방문 전 자주 묻는 질문" />
+      <div className="mt-10"><Reveal><FaqList items={faqs.location} /></Reveal></div>
+    </Section>
+
+    <CTA />
+  </main>;
+}

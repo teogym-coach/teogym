@@ -3,12 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #080808;
-  --foreground: #f7f7f4;
-  --muted: #a7a7a2;
-  --charcoal: #171717;
-  --line: rgba(255, 255, 255, 0.1);
-  --orange: #f97316;
+  --background: #fcfbf8;
+  --section: #f4efe8;
+  --card: #ffffff;
+  --ink: #2e2e2e;
+  --ink-soft: #6b655c;
+  --line: #e8e1d5;
+  --accent: #c89a5b;
+  --accent-deep: #a87f45;
 }
 
 * { box-sizing: border-box; }
@@ -16,9 +18,38 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
   word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
-::selection { background: var(--orange); color: #111; }
+::selection { background: var(--accent); color: #fff; }
+
+/* Scroll reveal — Reveal 컴포넌트(app/ui.tsx)가 is-visible을 토글합니다. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hover lift */
+.lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lift:hover {
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .lift, .lift:hover { transform: none; transition: none; }
+}

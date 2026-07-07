@@ -1,38 +1,198 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import Link from 'next/link';
-import { site } from './content';
+import { footerNav, site, type Faq, type PhotoSpec } from './content';
+import { MobileMenu, Reveal } from './ui';
 
 const isExternalHref = (href: string) => href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:');
 
+// ─── JSON-LD ─────────────────────────────────────────────────
+export function JsonLd({ data }: { data: object }) {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
+
+// ─── Header ──────────────────────────────────────────────────
 export function Header() {
-  return <header className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur">
+  return <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur">
     <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-      <Link href="/" className="font-bold tracking-tight">TEO<span className="text-orange-500">GYM</span></Link>
-      <nav className="hidden gap-5 text-sm text-zinc-300 lg:flex">{site.nav.map(([label, href]) => <Link key={href} href={href} className="hover:text-white">{label}</Link>)}</nav>
-      <Button href={site.links.reservation} dark compact>상담 예약</Button>
+      <Link href="/" className="text-lg font-extrabold tracking-tight text-ink">TEO<span className="text-accent">GYM</span></Link>
+      <nav aria-label="주 메뉴" className="hidden gap-5 text-sm font-medium text-ink-soft lg:flex">{site.nav.map(([label, href]) => <Link key={href} href={href} className="transition-colors hover:text-ink">{label}</Link>)}</nav>
+      <div className="flex items-center gap-3">
+        <span className="hidden lg:block"><Button href={site.links.reservation} compact>상담 예약</Button></span>
+        <MobileMenu nav={site.nav} reservationHref={site.links.reservation} />
+      </div>
     </div>
   </header>;
 }
 
+// ─── Footer ──────────────────────────────────────────────────
 export function Footer() {
-  return <footer className="border-t border-white/10 bg-zinc-950 px-4 py-10 text-sm text-zinc-400"><div className="mx-auto max-w-6xl"><p className="font-bold text-white">테오짐 PT 청라점</p><p className="mt-2">인천 서구 청라 지역 예약제 PT샵 · 대표 직접 수업 · 운동기록 관리</p><div className="mt-5 flex flex-wrap gap-x-4 gap-y-2"><TextLink href={site.links.phone}>전화 상담</TextLink><TextLink href={site.links.reservation}>네이버 예약</TextLink><TextLink href={site.links.talk}>네이버 톡톡</TextLink><TextLink href={site.links.blog}>블로그</TextLink><TextLink href={site.links.instagram}>인스타그램</TextLink><TextLink href={site.links.youtube}>유튜브</TextLink><TextLink href={site.links.directions}>오시는 길</TextLink></div><p className="mt-6">© TEO GYM. All rights reserved.</p></div></footer>;
+  return <footer className="border-t border-line bg-sand px-4 py-14 text-sm text-ink-soft">
+    <div className="mx-auto max-w-6xl">
+      <div className="grid gap-10 md:grid-cols-[1.2fr_2fr]">
+        <div>
+          <p className="text-base font-extrabold text-ink">테오짐 PT 청라점</p>
+          <p className="mt-3 leading-7">{site.tagline}<br />{site.address}<br />전화 {site.telephone}</p>
+          <p className="mt-3 leading-7">{site.hours.weekday.label} {site.hours.weekday.open}~{site.hours.weekday.close} · {site.hours.saturday.label} {site.hours.saturday.open}~{site.hours.saturday.close}<br />{site.hours.closed} · 예약제 운영</p>
+        </div>
+        <nav aria-label="푸터 메뉴" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          {footerNav.map(({ heading, items }) => <div key={heading}>
+            <p className="font-bold text-ink">{heading}</p>
+            <ul className="mt-3 space-y-2">{items.map(([label, href]) => <li key={href}><Link href={href} className="hover:text-ink">{label}</Link></li>)}</ul>
+          </div>)}
+          <div>
+            <p className="font-bold text-ink">채널</p>
+            <ul className="mt-3 space-y-2">
+              <li><TextLink href={site.links.reservation}>네이버 예약</TextLink></li>
+              <li><TextLink href={site.links.talk}>네이버 톡톡</TextLink></li>
+              <li><TextLink href={site.links.blog}>블로그</TextLink></li>
+              <li><TextLink href={site.links.instagram}>인스타그램</TextLink></li>
+              <li><TextLink href={site.links.youtube}>유튜브</TextLink></li>
+              <li><TextLink href={site.links.phone}>전화 상담</TextLink></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <p className="mt-10 border-t border-line pt-6 text-xs">© TEO GYM. All rights reserved.</p>
+    </div>
+  </footer>;
 }
 
-export function CTA() { return <section className="mx-auto max-w-6xl px-4 py-12"><div className="rounded-3xl border border-orange-500/30 bg-orange-500 p-7 text-black md:p-10"><p className="text-sm font-bold uppercase tracking-widest">Reservation</p><h2 className="mt-3 text-3xl font-black md:text-5xl">지금 몸 상태와 목표부터 상담해보세요.</h2><p className="mt-4 max-w-2xl font-medium">첫 상담에서 체형, 운동 경험, 체중 변화, 생활패턴을 확인한 뒤 필요한 관리 방향을 안내합니다.</p><div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"><Button href={site.links.phone} dark>전화 상담</Button><Button href={site.links.reservation} dark>네이버 예약</Button><Button href={site.links.talk}>네이버 톡톡</Button><Button href={site.links.directions}>찾아오시는 길</Button></div></div></section> }
+// ─── CTA ─────────────────────────────────────────────────────
+export function CTA() {
+  return <section className="mx-auto max-w-6xl px-4 py-16">
+    <Reveal>
+      <div className="rounded-3xl border border-accent/25 bg-sand p-8 md:p-12">
+        <p className="text-sm font-bold uppercase tracking-widest text-accent">Reservation</p>
+        <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-snug text-ink md:text-4xl">지금 몸 상태와 목표부터<br className="hidden md:block" /> 상담해보세요.</h2>
+        <p className="mt-4 max-w-2xl text-ink-soft">첫 상담에서 체형, 운동 경험, 체중 변화, 생활패턴을 확인한 뒤 필요한 관리 방향을 안내합니다.</p>
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <Button href={site.links.reservation}>네이버 예약</Button>
+          <Button href={site.links.phone} variant="outline">전화 상담</Button>
+          <Button href={site.links.talk} variant="outline">네이버 톡톡</Button>
+          <Button href={site.links.directions} variant="outline">찾아오시는 길</Button>
+        </div>
+      </div>
+    </Reveal>
+  </section>;
+}
 
-export function Button({ href, children, dark=false, compact=false }: { href: string; children: React.ReactNode; dark?: boolean; compact?: boolean }) {
+// ─── Button / TextLink ───────────────────────────────────────
+export function Button({ href, children, variant = 'primary', compact = false }: { href: string; children: React.ReactNode; variant?: 'primary' | 'outline'; compact?: boolean }) {
   const externalProps = isExternalHref(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-  return <Link href={href} {...externalProps} className={`inline-flex items-center justify-center rounded-full ${compact ? 'px-4 py-2' : 'px-5 py-3'} text-sm font-bold transition ${dark ? 'bg-black text-white hover:bg-zinc-900' : 'border border-black/20 bg-white/80 text-black hover:bg-white'}`}>{children}</Link>
+  const styles = variant === 'primary'
+    ? 'bg-accent text-white hover:bg-accent-deep'
+    : 'border border-line bg-card text-ink hover:border-accent/40 hover:text-accent-deep';
+  return <Link href={href} {...externalProps} className={`inline-flex items-center justify-center rounded-full ${compact ? 'px-4 py-2' : 'px-6 py-3.5'} text-sm font-bold transition-colors ${styles}`}>{children}</Link>;
 }
 
 export function TextLink({ href, children }: { href: string; children: React.ReactNode }) {
   const externalProps = isExternalHref(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-  return <Link href={href} {...externalProps} className="text-zinc-300 underline-offset-4 hover:text-white hover:underline">{children}</Link>;
+  return <Link href={href} {...externalProps} className="underline-offset-4 transition-colors hover:text-accent-deep hover:underline">{children}</Link>;
 }
 
-export function PageHero({ eyebrow, title, desc }: { eyebrow: string; title: string; desc: string }) { return <section className="mx-auto max-w-6xl px-4 py-16 md:py-24"><p className="text-sm font-bold text-orange-500">{eyebrow}</p><h1 className="mt-4 max-w-4xl text-4xl font-black leading-tight md:text-6xl">{title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-300">{desc}</p></section> }
+// ─── Page Hero (H1 + Breadcrumb) ─────────────────────────────
+export function PageHero({ eyebrow, title, desc, crumb }: { eyebrow: string; title: string; desc: string; crumb: string }) {
+  return <section className="border-b border-line bg-sand">
+    <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
+      <Reveal>
+        <nav aria-label="현재 위치" className="text-xs font-medium text-ink-soft"><Link href="/" className="hover:text-accent-deep">홈</Link><span aria-hidden className="mx-2">/</span><span className="text-accent-deep">{crumb}</span></nav>
+        <p className="mt-6 text-sm font-bold tracking-wide text-accent">{eyebrow}</p>
+        <h1 className="mt-4 max-w-4xl text-4xl font-extrabold leading-[1.25] text-ink md:text-5xl">{title}</h1>
+        <p className="mt-6 max-w-2xl text-lg leading-8 text-ink-soft">{desc}</p>
+      </Reveal>
+    </div>
+  </section>;
+}
 
-export function Card({ title, children }: { title: string; children: React.ReactNode }) { return <div className="rounded-3xl border border-white/10 bg-zinc-900/70 p-6"><h3 className="text-xl font-bold">{title}</h3><div className="mt-3 leading-7 text-zinc-300">{children}</div></div> }
+// ─── Section 골격 ────────────────────────────────────────────
+export function Section({ children, tone = 'bg', className = '' }: { children: React.ReactNode; tone?: 'bg' | 'sand'; className?: string }) {
+  return <section className={`${tone === 'sand' ? 'bg-sand' : ''} ${className}`}><div className="mx-auto max-w-6xl px-4 py-16 md:py-24">{children}</div></section>;
+}
 
-export function FeatureList({ items }: { items: string[] }) { return <div className="mx-auto grid max-w-6xl gap-3 px-4 pb-16 sm:grid-cols-2 lg:grid-cols-3">{items.map((item) => <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-zinc-200"><span className="mr-2 text-orange-500">●</span>{item}</div>)}</div> }
+export function SectionTitle({ eyebrow, title, desc }: { eyebrow?: string; title: string; desc?: string }) {
+  return <Reveal>
+    <div className="max-w-3xl">
+      {eyebrow && <p className="text-sm font-bold tracking-wide text-accent">{eyebrow}</p>}
+      <h2 className="mt-3 text-2xl font-extrabold leading-snug text-ink md:text-3xl">{title}</h2>
+      {desc && <p className="mt-4 leading-8 text-ink-soft">{desc}</p>}
+    </div>
+  </Reveal>;
+}
 
-export function ImagePlaceholder({ label }: { label: string }) { return <div className="flex min-h-72 items-center justify-center rounded-3xl border border-dashed border-white/20 bg-gradient-to-br from-zinc-900 to-zinc-800 p-8 text-center text-zinc-400"><div><p className="text-sm font-bold text-orange-500">PUBLIC / IMAGES</p><p className="mt-2">{label} 이미지를 나중에 교체할 수 있는 placeholder 영역</p></div></div> }
+// ─── Card ────────────────────────────────────────────────────
+export function Card({ title, children, href }: { title: string; children: React.ReactNode; href?: string }) {
+  const body = <div className={`h-full rounded-2xl border border-line bg-card p-6 shadow-card ${href ? 'lift hover:shadow-lift' : ''}`}>
+    <h3 className="text-lg font-bold text-ink">{title}</h3>
+    <div className="mt-3 leading-7 text-ink-soft">{children}</div>
+    {href && <p className="mt-4 text-sm font-bold text-accent-deep">자세히 보기 →</p>}
+  </div>;
+  return href ? <Link href={href} className="block h-full">{body}</Link> : body;
+}
+
+// ─── Feature List (ul/li — 헤딩 구조를 어지럽히지 않음) ──────
+export function FeatureList({ items }: { items: readonly string[] }) {
+  return <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map((item) => <li key={item} className="flex items-start gap-3 rounded-2xl border border-line bg-card p-4 leading-7 text-ink shadow-card"><span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />{item}</li>)}
+  </ul>;
+}
+
+// ─── 진행 단계 ───────────────────────────────────────────────
+export function Steps({ items }: { items: readonly { title: string; desc: string }[] }) {
+  return <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {items.map((step, i) => <li key={step.title} className="rounded-2xl border border-line bg-card p-6 shadow-card">
+      <p className="text-sm font-extrabold text-accent">{String(i + 1).padStart(2, '0')}</p>
+      <h3 className="mt-2 font-bold text-ink">{step.title}</h3>
+      <p className="mt-2 text-sm leading-6 text-ink-soft">{step.desc}</p>
+    </li>)}
+  </ol>;
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────
+export function FaqList({ items }: { items: readonly Faq[] }) {
+  return <div className="grid gap-4">
+    {items.map(({ q, a }) => <details key={q} className="group rounded-2xl border border-line bg-card p-6 shadow-card">
+      <summary className="cursor-pointer list-none font-bold text-ink marker:content-none"><span aria-hidden className="mr-3 text-accent">Q.</span>{q}</summary>
+      <p className="mt-4 border-t border-line pt-4 leading-8 text-ink-soft">{a}</p>
+    </details>)}
+  </div>;
+}
+
+// ─── 관련 프로그램 교차 링크 ─────────────────────────────────
+export function RelatedLinks({ items }: { items: readonly { title: string; desc: string; href: string }[] }) {
+  return <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map(({ title, desc, href }) => <Card key={href} title={title} href={href}>{desc}</Card>)}
+  </div>;
+}
+
+// ─── Photo ───────────────────────────────────────────────────
+// public/images/에 매니페스트(content.ts의 photos)와 같은 파일명으로 사진을 넣고
+// 빌드하면 자동으로 실제 사진이 표시됩니다. 파일이 없으면 같은 비율의
+// placeholder가 렌더링되어 교체 시 레이아웃이 밀리지 않습니다.
+export function Photo({ spec, priority = false, className = '' }: { spec: PhotoSpec; priority?: boolean; className?: string }) {
+  const exists = fs.existsSync(path.join(process.cwd(), 'public', spec.src));
+
+  if (exists) {
+    return <img
+      src={spec.src}
+      alt={spec.alt}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchPriority={priority ? 'high' : undefined}
+      className={`w-full rounded-3xl border border-line object-cover shadow-card ${className}`}
+      style={{ aspectRatio: spec.ratio }}
+    />;
+  }
+
+  return <div
+    role="img"
+    aria-label={`${spec.alt} (준비 중)`}
+    className={`flex w-full items-center justify-center rounded-3xl border border-dashed border-accent/40 bg-sand p-6 text-center ${className}`}
+    style={{ aspectRatio: spec.ratio }}
+  >
+    <div className="text-sm text-ink-soft">
+      <p className="font-bold text-accent-deep">{spec.label}</p>
+      <p className="mt-2 break-all font-mono text-xs">{spec.src}</p>
+      <p className="mt-1 text-xs">비율 {spec.ratio.replace('/', ':')} · 파일 추가 후 빌드하면 자동 교체</p>
+    </div>
+  </div>;
+}
