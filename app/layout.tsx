@@ -30,7 +30,8 @@ const jsonLd = {
     addressRegion: '인천광역시',
     addressCountry: 'KR',
   },
-  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  // TODO: 이전 Google Maps 좌표가 실제 위치와 달라 제거함. 정확한 좌표 확인 후 복원할 것.
+  // geo: { '@type': 'GeoCoordinates', latitude: 0.0, longitude: 0.0 },
   hasMap: site.links.place,
   openingHoursSpecification: [
     {

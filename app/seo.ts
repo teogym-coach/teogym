@@ -20,11 +20,10 @@ export function makeMetadata(meta: { title: string; description: string; path: s
       other: otherVerification,
     },
     keywords: site.keywords,
+    // geo.position/ICBM 메타태그는 좌표가 부정확해 제거함. 정확한 좌표 확인 후 복원할 것.
     other: {
       'geo.region': 'KR-28',
       'geo.placename': '인천광역시 서구 청라동',
-      'geo.position': `${site.geo.lat};${site.geo.lng}`,
-      ICBM: `${site.geo.lat}, ${site.geo.lng}`,
     },
     openGraph: {
       title: meta.title,
