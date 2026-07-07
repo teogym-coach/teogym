@@ -50,6 +50,14 @@ export default function Page() {
     </Section>
 
     <Section tone="sand">
+      <SectionTitle eyebrow="Studio" title="스튜디오 미리보기" desc="통창 전망과 머신·프리웨이트 존을 갖춘 5층 스튜디오입니다. 예약제로 운영되어 쾌적하게 이용할 수 있습니다." />
+      <div className="mt-10 grid gap-4 md:grid-cols-2">
+        <Reveal><Photo spec={photos.facility1} /></Reveal>
+        <Reveal delay={100}><Photo spec={photos.facility2} /></Reveal>
+      </div>
+    </Section>
+
+    <Section>
       <SectionTitle eyebrow="FAQ" title="방문 전 자주 묻는 질문" />
       <div className="mt-10"><Reveal><FaqList items={faqs.location} /></Reveal></div>
     </Section>

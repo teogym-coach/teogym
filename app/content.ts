@@ -104,14 +104,17 @@ export const pageMeta = {
 // ─────────────────────────────────────────────────────────────
 export const photos = {
   heroStudio: { src: '/images/teogym-hero-04.jpg', alt: '테오짐 PT 청라점 스튜디오 전경 - TEO GYM 로고 거울, 스미스머신과 머신 존, 창밖 청라 도시 전망', ratio: '4/3', label: '스튜디오 대표 사진 (가로)' },
-  coachProfile: { src: '/images/coach-profile.jpg', alt: '테오짐 PT 청라점 김태오 대표 프로필', ratio: '3/4', label: '김태오 대표 프로필 (세로)' },
-  coachLesson: { src: '/images/coach-lesson.jpg', alt: '김태오 대표가 회원과 1:1 PT 수업을 진행하는 모습', ratio: '4/3', label: '1:1 수업 장면' },
-  appDashboard: { src: '/images/app-dashboard.png', alt: '테오짐 회원 전용 앱 대시보드 화면 - 체중 변화 그래프와 운동 기록 요약', ratio: '9/19', label: '회원 앱 대시보드 화면 (세로 스크린샷)' },
+  coachProfile: { src: '/images/coach-profile.jpg', alt: '테오짐 PT 청라점 김태오 대표 프로필 - TEO GYM 로고 앞에서', ratio: '3/4', label: '김태오 대표 프로필 (세로)' },
+  coachLesson: { src: '/images/coach-lesson.jpg', alt: '김태오 대표가 상담 데스크에서 회원과 1:1 상담을 진행하는 모습', ratio: '4/3', label: '1:1 상담 장면' },
+  appDashboard: { src: '/images/app-dashboard.jpg', alt: '테오짐 회원 전용 앱으로 수업 기록을 함께 확인하는 모습', ratio: '9/19', label: '회원 앱 사용 장면 (세로)' },
   appRecords: { src: '/images/app-records.png', alt: '테오짐 회원 전용 앱 운동기록 화면 - 종목, 세트, 횟수, 중량, RPE 기록', ratio: '9/19', label: '회원 앱 운동기록 화면 (세로 스크린샷)' },
-  postureSession: { src: '/images/posture-session.jpg', alt: '테오짐 청라 체형교정 PT 수업 - 자세와 움직임을 확인하는 모습', ratio: '4/3', label: '체형교정 수업 장면' },
-  dietSession: { src: '/images/diet-session.jpg', alt: '테오짐 청라 다이어트 PT 수업 - 운동 지도 장면', ratio: '4/3', label: '다이어트 수업 장면' },
-  bulkSession: { src: '/images/bulk-session.jpg', alt: '테오짐 청라 벌크업 PT 수업 - 중량 운동 지도 장면', ratio: '4/3', label: '벌크업 수업 장면' },
-  recordsSheet: { src: '/images/records-sheet.jpg', alt: '테오짐 운동기록 - 종목, 세트, 중량, RPE가 기록된 화면', ratio: '4/3', label: '운동기록 예시 화면' },
+  postureSession: { src: '/images/posture-session.jpg', alt: '테오짐 청라 체형교정 PT - 김태오 대표가 회원의 움직임과 가동 범위를 평가하는 모습', ratio: '4/3', label: '움직임 평가 장면' },
+  dietSession: { src: '/images/diet-session.jpg', alt: '테오짐 청라 1:1 PT 수업 - 랫풀다운 자세를 옆에서 직접 지도하는 모습', ratio: '4/3', label: '1:1 수업 지도 장면' },
+  bulkSession: { src: '/images/bulk-session.jpg', alt: '테오짐 청라 벌크업 PT - 덤벨 숄더 프레스 중량 운동 장면', ratio: '4/3', label: '중량 운동 장면' },
+  recordsSheet: { src: '/images/records-sheet.jpg', alt: '테오짐 운동기록 작성 화면 - 종목, 세트, 중량, RPE, 자극도를 태블릿에 기록', ratio: '4/3', label: '운동기록 작성 화면' },
+  postureBeforeAfter: { src: '/images/posture-before-after.jpg', alt: '테오짐 체형교정 전후 비교 - 어깨 가동 범위가 달라진 모습', ratio: '1/1', label: '체형교정 전후 비교' },
+  facility1: { src: '/images/facility-1.jpg', alt: '테오짐 PT 청라점 시설 - 머신 존과 헤링본 마루, 통창 전망', ratio: '4/3', label: '시설 전경 1' },
+  facility2: { src: '/images/facility-2.jpg', alt: '테오짐 PT 청라점 시설 - TEO GYM 로고 거울과 프리웨이트 존', ratio: '4/3', label: '시설 전경 2' },
   locationMap: { src: '/images/location-map.jpg', alt: '테오짐 PT 청라점 위치 지도 - 인천 서구 청라커낼로 280 청라골든프라자 5층 505호', ratio: '16/9', label: '위치 지도 캡처' },
 } as const;
 

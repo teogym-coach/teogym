@@ -1,5 +1,5 @@
-import { Button, Card, CTA, JsonLd, PageHero, Section, SectionTitle } from '../components';
-import { pageMeta, site } from '../content';
+import { Button, Card, CTA, JsonLd, PageHero, Photo, Section, SectionTitle } from '../components';
+import { pageMeta, photos, site } from '../content';
 import { breadcrumbSchema } from '../schema';
 import { makeMetadata } from '../seo';
 import { Reveal } from '../ui';
@@ -21,6 +21,15 @@ export default function Page() {
     <PageHero crumb="후기/사례" eyebrow="후기와 사례" title="공개 가능한 사례만 블로그로 연결합니다" desc="허위 후기를 만들지 않습니다. 실제 공개 가능한 콘텐츠만 카테고리별로 블로그에 연결하는 방식으로 운영합니다." />
 
     <Section>
+      <div className="grid items-center gap-12 md:grid-cols-2">
+        <Reveal><div className="mx-auto w-full max-w-md"><Photo spec={photos.postureBeforeAfter} /></div></Reveal>
+        <Reveal delay={150}>
+          <SectionTitle eyebrow="Real Change" title="변화는 기록으로 남습니다" desc="어깨 가동 범위가 달라진 체형교정 전후 비교처럼, 테오짐의 변화는 사진과 기록으로 남습니다. 공개 가능한 실제 사례만 보여드립니다." />
+        </Reveal>
+      </div>
+    </Section>
+
+    <Section tone="sand">
       <SectionTitle eyebrow="Cases" title="카테고리별 사례 보기" />
       <div className="mt-10 grid gap-4 md:grid-cols-2">
         {categories.map(({ title, desc }, i) => <Reveal key={title} delay={i * 60}>
