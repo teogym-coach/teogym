@@ -103,7 +103,7 @@ export const pageMeta = {
 // ratio는 CSS aspect-ratio로 고정되어 교체 시 레이아웃이 밀리지 않습니다.
 // ─────────────────────────────────────────────────────────────
 export const photos = {
-  heroStudio: { src: '/images/teogym-hero-02.jpg', alt: '테오짐 PT 청라점 프라이빗 PT 스튜디오 전경 - TEO GYM 로고 거울과 넓은 헤링본 마루', ratio: '16/11', label: '스튜디오 대표 사진 (가로)' },
+  heroStudio: { src: '/images/teogym-hero-04.jpg', alt: '테오짐 PT 청라점 스튜디오 전경 - TEO GYM 로고 거울, 스미스머신과 머신 존, 창밖 청라 도시 전망', ratio: '4/3', label: '스튜디오 대표 사진 (가로)' },
   coachProfile: { src: '/images/coach-profile.jpg', alt: '테오짐 PT 청라점 김태오 대표 프로필', ratio: '3/4', label: '김태오 대표 프로필 (세로)' },
   coachLesson: { src: '/images/coach-lesson.jpg', alt: '김태오 대표가 회원과 1:1 PT 수업을 진행하는 모습', ratio: '4/3', label: '1:1 수업 장면' },
   appDashboard: { src: '/images/app-dashboard.png', alt: '테오짐 회원 전용 앱 대시보드 화면 - 체중 변화 그래프와 운동 기록 요약', ratio: '9/19', label: '회원 앱 대시보드 화면 (세로 스크린샷)' },
