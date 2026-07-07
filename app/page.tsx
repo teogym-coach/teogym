@@ -40,15 +40,16 @@ export default function Home() {
         loading="eager"
         fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover object-center md:object-[54%_35%]"
+        style={{ filter: 'contrast(1.03) saturate(1.02) brightness(1.02)' }}
       />
-      {/* 데스크톱: 텍스트 뒤만 밝게 — 오버레이 폭을 줄여 사진이 더 일찍, 더 선명하게 드러나는 그라데이션 */}
-      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.96) 0%, rgba(248,244,238,0.88) 24%, rgba(248,244,238,0.55) 38%, rgba(248,244,238,0.18) 52%, rgba(248,244,238,0.04) 64%, rgba(248,244,238,0) 100%)' }} />
+      {/* 데스크톱: 텍스트 뒤(~40%)는 거의 흰 배경, 40~60%에서 빠르게 투명, 60% 이후는 원본 사진 */}
+      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.98) 0%, rgba(248,244,238,0.96) 18%, rgba(248,244,238,0.90) 34%, rgba(248,244,238,0.55) 44%, rgba(248,244,238,0.16) 54%, rgba(248,244,238,0.03) 60%, rgba(248,244,238,0) 66%)' }} />
       {/* 모바일: 텍스트 가독성 우선 — 상단은 진하게, 하단은 사진이 선명하게 */}
       <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(248,244,238,0.98) 0%, rgba(248,244,238,0.94) 48%, rgba(248,244,238,0.55) 78%, rgba(248,244,238,0.25) 100%)' }} />
       <div className="relative mx-auto flex min-h-[600px] max-w-6xl items-center px-4 pb-28 pt-20 md:min-h-[760px] md:px-10 md:pb-36 md:pt-24">
         <Reveal>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent-deep">청라 프리미엄 1:1 PT 스튜디오</p>
-          <h1 className="mt-6 max-w-[520px] text-4xl font-bold leading-[1.25] tracking-tight text-ink md:max-w-[640px] md:text-6xl lg:text-7xl">기록이 만든 변화,<br />테오짐은 다릅니다</h1>
+          <h1 className="mt-6 max-w-[520px] text-4xl font-extrabold leading-[1.15] tracking-tight text-ink md:max-w-[640px] md:text-6xl lg:text-7xl">기록이 만든 변화,<br />테오짐은 다릅니다</h1>
           <p className="mt-7 max-w-[520px] text-lg leading-8 text-ink-soft">정확한 평가, 체계적인 기록, 꾸준한 피드백으로<br className="hidden sm:block" /> 몸의 변화를 끝까지 관리합니다.</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button href={site.links.reservation}>무료 체험 상담 예약</Button>
@@ -61,7 +62,7 @@ export default function Home() {
     {/* Floating feature card — 히어로 하단에 떠 있는 흰색 카드 바 (부드러운 그림자) */}
     <section className="relative z-10 mx-auto -mt-20 max-w-6xl px-4 md:-mt-24">
       <Reveal>
-        <div className="grid grid-cols-1 divide-y divide-line rounded-2xl border border-line bg-card shadow-card lg:grid-cols-5 lg:divide-x lg:divide-y-0">
+        <div className="grid grid-cols-1 divide-y divide-line rounded-2xl border border-line bg-card shadow-[0_20px_50px_rgba(0,0,0,0.08)] lg:grid-cols-5 lg:divide-x lg:divide-y-0">
           {[
             { icon: 'clipboard', title: '정확한 평가', desc: '체형·움직임·체성분을 먼저 확인' },
             { icon: 'chart', title: '기록 기반 관리', desc: '운동·식단·컨디션 모든 과정을 기록' },
