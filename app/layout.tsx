@@ -19,7 +19,7 @@ const jsonLd = {
   url: site.url,
   telephone: site.telephone,
   image: new URL(site.openGraphImage.url, site.url).toString(),
-  priceRange: '₩40,000~',
+  priceRange: '상담 후 안내',
   areaServed: [site.region, '인천 서구 청라', '인천광역시 서구'],
   knowsAbout: ['PT샵', '퍼스널트레이닝', '헬스장', '체형교정 PT', '다이어트 PT', '벌크업 PT', '운동기록 관리'],
   address: {

@@ -72,16 +72,28 @@ export function CountUp({ end, suffix = '', prefix = '', duration = 1200 }: { en
 }
 
 // ─── Mobile Menu ─────────────────────────────────────────────
+// 헤더의 backdrop-blur가 fixed 요소의 기준을 헤더로 바꿔 메뉴가 잘리는 문제가
+// 있어, 버튼 기준 absolute 드롭다운 카드로 배치합니다. 화면 너비를 넘지 않도록
+// min(100vw-여백, max-width)로 제한하고, 내용이 길면 카드 내부에서 스크롤됩니다.
 export function MobileMenu({ nav, reservationHref }: { nav: readonly (readonly [string, string])[]; reservationHref: string }) {
   const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    if (!open) return;
+    const onOutside = (e: MouseEvent | TouchEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', onOutside);
+    document.addEventListener('touchstart', onOutside);
+    return () => {
+      document.removeEventListener('mousedown', onOutside);
+      document.removeEventListener('touchstart', onOutside);
+    };
   }, [open]);
 
   return (
-    <div className="lg:hidden">
+    <div ref={rootRef} className="relative lg:hidden">
       <button
         type="button"
         aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
@@ -96,10 +108,10 @@ export function MobileMenu({ nav, reservationHref }: { nav: readonly (readonly [
         </span>
       </button>
       {open && (
-        <div className="fixed inset-x-0 bottom-0 top-[73px] z-50 overflow-y-auto bg-bg px-6 py-8">
-          <nav aria-label="모바일 메뉴" className="flex flex-col gap-1">
+        <div className="absolute right-0 top-[calc(100%+12px)] z-50 max-h-[min(calc(100dvh-7rem),32rem)] w-[min(calc(100vw-2rem),20rem)] overflow-y-auto rounded-2xl border border-line bg-bg p-4 shadow-lift">
+          <nav aria-label="모바일 메뉴" className="flex flex-col gap-0.5">
             {nav.map(([label, href]) => (
-              <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-3.5 text-lg font-semibold text-ink hover:bg-sand">
+              <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-2.5 text-base font-semibold text-ink hover:bg-sand">
                 {label}
               </Link>
             ))}
@@ -108,7 +120,7 @@ export function MobileMenu({ nav, reservationHref }: { nav: readonly (readonly [
             href={reservationHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-4 text-base font-bold text-white"
+            className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-bold text-white"
           >
             무료 체험 상담 예약
           </a>

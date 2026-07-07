@@ -40,7 +40,7 @@ export default function Home() {
     <Section>
       <div className="grid gap-4 sm:grid-cols-3">
         {[
-          { value: <CountUp end={40000} suffix="원" />, label: '1:1 PT 회당 기준 가격' },
+          { value: <span>1:1</span>, label: '대표가 직접, 담당 교체 없는 전담 수업' },
           { value: <CountUp end={5} suffix="가지" />, label: '매 수업 남기는 기본 기록 — 종목·세트·횟수·중량·RPE' },
           { value: <CountUp end={6} suffix="일" />, label: '주간 운영 — 평일 10~22시 · 토 10~15시' },
         ].map(({ value, label }, i) => <Reveal key={label} delay={i * 100}>
@@ -82,7 +82,7 @@ export default function Home() {
     <Section>
       <div className="grid gap-4 md:grid-cols-2">
         <Reveal>
-          <Card title="가격 안내" href="/pricing/">1:1 PT 회당 4만원 기준. 체험 수업과 첫 등록, 2:1 수업은 몸 상태와 목표 상담 후 안내드립니다.</Card>
+          <Card title="가격 안내" href="/pricing/">상담에서 몸 상태와 목표를 확인한 뒤 목적에 맞는 수업 구성과 신규 회원 첫 등록 혜택을 안내드립니다.</Card>
         </Reveal>
         <Reveal delay={100}>
           <Card title="후기와 사례" href="/cases/">허위 후기를 만들지 않습니다. 실제 공개 가능한 사례만 블로그로 연결합니다.</Card>

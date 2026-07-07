@@ -17,7 +17,7 @@ const manage = ['마른 체형 벌크업', '근육량 증가 목표 관리', '�
 const related = [
   { title: '운동기록 관리', desc: '중량 성장이 어떻게 기록되고 연결되는지 확인하세요.', href: '/records/' },
   { title: '체형교정 PT', desc: '무너진 자세를 먼저 잡고 중량을 올리고 싶다면.', href: '/posture/' },
-  { title: '가격 안내', desc: '1:1 PT 회당 4만원 기준. 상담 후 구성을 안내합니다.', href: '/pricing/' },
+  { title: '가격 안내', desc: '상담 후 목적에 맞는 구성과 첫 등록 혜택을 안내합니다.', href: '/pricing/' },
 ];
 
 export default function Page() {

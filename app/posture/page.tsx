@@ -17,7 +17,7 @@ const manage = ['어깨 불편감 관리', '허리 불편감 관리', '골반 �
 const related = [
   { title: '다이어트 PT', desc: '체형 관리와 체중 감량을 함께 진행하고 싶다면.', href: '/diet/' },
   { title: '운동기록 관리', desc: '교정 과정의 변화가 어떻게 기록되는지 확인해보세요.', href: '/records/' },
-  { title: '가격 안내', desc: '1:1 PT 회당 4만원 기준. 상담 후 구성을 안내합니다.', href: '/pricing/' },
+  { title: '가격 안내', desc: '상담 후 목적에 맞는 구성과 첫 등록 혜택을 안내합니다.', href: '/pricing/' },
 ];
 
 export default function Page() {
