@@ -34,27 +34,27 @@ export default function Home() {
 
     {/* Hero — 밝은 센터 전경이 화면 전체 배경으로 깔리는 프리미엄 히어로 */}
     <section className="relative overflow-hidden">
-      {/* object-position 60% 40%: TEO GYM 로고와 장비가 중심에 오고 왼쪽 바닥 비중이 줄어듦 (모바일에서도 로고 노출) */}
+      {/* 아주 미세한 슬로우 줌(3%, 8초) — 흐림 없이 애플 수준의 절제된 움직임. object-position 50% 40%: 로고와 공간이 중심 */}
       <img
         src={photos.heroStudio.src}
         alt={photos.heroStudio.alt}
         loading="eager"
         fetchPriority="high"
-        className="hero-zoom absolute inset-0 h-full w-full object-cover object-[60%_40%]"
+        className="hero-zoom absolute inset-0 h-full w-full object-cover object-[50%_40%]"
       />
-      {/* 데스크톱: 텍스트 뒤(~40%)는 거의 흰 배경, 40~60%에서 빠르게 투명, 60% 이후는 원본 사진 */}
-      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.98) 0%, rgba(248,244,238,0.96) 18%, rgba(248,244,238,0.90) 34%, rgba(248,244,238,0.55) 44%, rgba(248,244,238,0.16) 54%, rgba(248,244,238,0.03) 60%, rgba(248,244,238,0) 66%)' }} />
+      {/* 데스크톱: 텍스트가 자기 공간을 갖도록 흰 영역을 ~42%까지 유지하고, 이후 자연광처럼 긴 페더로 사진에 녹아드는 그라데이션 */}
+      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.97) 0%, rgba(248,244,238,0.95) 18%, rgba(248,244,238,0.90) 32%, rgba(248,244,238,0.82) 42%, rgba(248,244,238,0.64) 50%, rgba(248,244,238,0.45) 58%, rgba(248,244,238,0.28) 66%, rgba(248,244,238,0.14) 74%, rgba(248,244,238,0.06) 82%, rgba(248,244,238,0.02) 90%, rgba(248,244,238,0) 100%)' }} />
       {/* 모바일: 텍스트 가독성 우선 — 상단은 진하게, 하단은 사진이 선명하게 */}
       <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(248,244,238,0.98) 0%, rgba(248,244,238,0.94) 48%, rgba(248,244,238,0.55) 78%, rgba(248,244,238,0.25) 100%)' }} />
       <div className="relative mx-auto flex min-h-[600px] max-w-6xl items-center px-4 pb-28 pt-20 md:min-h-[760px] md:px-10 md:pb-36 md:pt-24">
         <div>
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent-deep">청라 프리미엄 1:1 PT 스튜디오</p>
-            <h1 className="mt-6 max-w-[520px] text-4xl font-extrabold leading-[1.15] tracking-tight text-ink md:max-w-[640px] md:text-6xl lg:text-7xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
-            <p className="mt-7 max-w-[520px] text-lg leading-8 text-ink-soft">체형교정 · 다이어트 · 벌크업<br />대표가 직접 평가하고 운동기록과 변화를 끝까지 관리합니다.</p>
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent-deep">청라 프리미엄 1:1 PT 스튜디오</p>
+            <h1 className="mt-7 max-w-[520px] text-4xl font-extrabold leading-[1.22] tracking-tight text-ink md:max-w-[640px] md:text-6xl lg:text-7xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
+            <p className="mt-8 max-w-[480px] text-lg leading-9 text-ink-soft">체형교정 · 다이어트 · 벌크업<br />대표가 직접 평가하고 운동기록과 변화를 끝까지 관리합니다.</p>
           </Reveal>
           <Reveal delay={150}>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Button href={site.links.reservation}>무료 상담 예약</Button>
               <Button href="/app/" variant="outline">회원앱 둘러보기</Button>
             </div>
