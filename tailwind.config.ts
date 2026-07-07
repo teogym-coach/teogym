@@ -11,8 +11,13 @@ const config: Config = {
         ink: '#2E2E2E',
         'ink-soft': '#6B655C',
         line: '#E8E1D5',
+        // 다크 히어로 전용 토큰
+        night: '#111111',
+        'night-2': '#1A1A1A',
+        mist: '#CFCFCF',
         accent: {
-          DEFAULT: '#C89A5B',
+          DEFAULT: '#C89B5E',
+          light: '#D8AE73',
           deep: '#A87F45',
           soft: '#F1E6D4',
         },

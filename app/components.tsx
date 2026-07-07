@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Link from 'next/link';
 import { footerNav, site, type Faq, type PhotoSpec } from './content';
-import { MobileMenu, Reveal } from './ui';
+import { Reveal } from './ui';
 
 const isExternalHref = (href: string) => href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:');
 
@@ -11,19 +11,7 @@ export function JsonLd({ data }: { data: object }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
 
-// ─── Header ──────────────────────────────────────────────────
-export function Header() {
-  return <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur">
-    <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-      <Link href="/" className="text-lg font-extrabold tracking-tight text-ink">TEO<span className="text-accent">GYM</span></Link>
-      <nav aria-label="주 메뉴" className="hidden gap-5 text-sm font-medium text-ink-soft lg:flex">{site.nav.map(([label, href]) => <Link key={href} href={href} className="transition-colors hover:text-ink">{label}</Link>)}</nav>
-      <div className="flex items-center gap-3">
-        <span className="hidden lg:block"><Button href={site.links.reservation} compact>상담 예약</Button></span>
-        <MobileMenu nav={site.nav} reservationHref={site.links.reservation} />
-      </div>
-    </div>
-  </header>;
-}
+// Header는 라우트/스크롤 인식이 필요해 클라이언트 컴포넌트로 분리됨 → app/ui.tsx의 SiteHeader
 
 // ─── Footer ──────────────────────────────────────────────────
 export function Footer() {

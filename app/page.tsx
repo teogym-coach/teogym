@@ -13,7 +13,7 @@ function FeatureIcon({ name }: { name: string }) {
     user: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></>,
     shield: <><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></>,
   };
-  return <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7 shrink-0 text-accent">{paths[name]}</svg>;
+  return <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0 text-accent-deep transition-colors">{paths[name]}</svg>;
 }
 
 const programs = [
@@ -33,31 +33,33 @@ export default function Home() {
   return <main>
     <JsonLd data={faqSchema(faqs.home)} />
 
-    {/* Hero — 밝은 센터 전경이 화면 전체 배경으로 깔리는 프리미엄 히어로 */}
-    <section className="relative overflow-hidden">
-      {/* 시안 기준 크롭(오른쪽 20% 제거, 로고 64% 지점) + 미세 슬로우 줌. PC는 로고·렉이 보이는 상단 밴드, 모바일은 로고가 들어오는 58% 지점 */}
+    {/* Hero — 블랙/차콜 + 브론즈 골드의 프리미엄 다크 히어로 (사진·구도 유지, 톤만 전환) */}
+    <section className="relative overflow-hidden bg-night">
       <img
         src={photos.heroStudio.src}
         alt={photos.heroStudio.alt}
         loading="eager"
         fetchPriority="high"
         className="hero-zoom absolute inset-0 h-full w-full object-cover object-[58%_center] md:object-[50%_28%]"
+        style={{ filter: 'contrast(1.06) brightness(0.96)' }}
       />
-      {/* 데스크톱(시안 기준): 왼쪽 ~28%만 확실히 밝게, 이후 짧고 부드러운 페더로 사진이 넓게 드러나는 그라데이션 */}
-      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(248,244,238,0.97) 0%, rgba(248,244,238,0.93) 16%, rgba(248,244,238,0.80) 28%, rgba(248,244,238,0.55) 38%, rgba(248,244,238,0.30) 48%, rgba(248,244,238,0.12) 58%, rgba(248,244,238,0.03) 66%, rgba(248,244,238,0) 74%)' }} />
-      {/* 모바일: 텍스트 가독성을 유지하며 오버레이를 아주 약간만 완화 */}
-      <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(248,244,238,0.95) 0%, rgba(248,244,238,0.88) 45%, rgba(248,244,238,0.40) 75%, rgba(248,244,238,0.10) 100%)' }} />
-      <div className="relative mx-auto flex min-h-[540px] max-w-6xl items-center px-4 pb-20 pt-16 md:min-h-[680px] md:px-10 md:pb-36 md:pt-20">
+      {/* 데스크톱: 왼쪽 다크 그라데이션 — 오른쪽은 공간·기구 디테일이 살아있게 */}
+      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(17,17,17,0.94) 0%, rgba(17,17,17,0.86) 22%, rgba(17,17,17,0.62) 40%, rgba(17,17,17,0.32) 56%, rgba(17,17,17,0.12) 70%, rgba(17,17,17,0.05) 100%)' }} />
+      {/* 모바일: 텍스트 가독성 우선 — 더 강한 다크 오버레이 */}
+      <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(17,17,17,0.84) 0%, rgba(17,17,17,0.74) 45%, rgba(17,17,17,0.52) 75%, rgba(17,17,17,0.62) 100%)' }} />
+      {/* 투명 헤더 가독성용 상단 스크림 */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28" style={{ background: 'linear-gradient(180deg, rgba(17,17,17,0.55), rgba(17,17,17,0))' }} />
+      <div className="relative mx-auto flex min-h-[600px] max-w-6xl items-center px-4 pb-24 pt-28 md:min-h-[720px] md:px-10 md:pb-40 md:pt-32">
         <div>
           <Reveal>
-            <h1 className="max-w-[520px] text-[34px] font-bold leading-[1.3] tracking-tight text-ink md:max-w-[600px] md:text-5xl md:leading-[1.35] lg:text-6xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
-            <p className="mt-6 text-lg font-medium text-ink md:mt-8">체형교정 · 다이어트 · 벌크업</p>
-            <p className="mt-4 max-w-[440px] text-base leading-7 text-ink-soft">대표가 직접 평가하고<br />운동기록과 변화를 끝까지 관리합니다.</p>
+            <h1 className="max-w-[560px] text-4xl font-extrabold leading-[1.28] tracking-tight text-white md:max-w-[680px] md:text-6xl md:leading-[1.3] lg:text-7xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
+            <p className="mt-6 text-lg font-medium text-white md:mt-8">체형교정 · 다이어트 · 벌크업</p>
+            <p className="mt-4 max-w-[460px] text-base leading-7 text-mist">대표가 직접 평가하고<br />운동기록과 변화를 끝까지 관리합니다.</p>
           </Reveal>
           <Reveal delay={150}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row md:mt-10">
-              <a href={site.links.reservation} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md bg-accent px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-accent-deep">무료 상담 예약</a>
-              <Link href="/app/" className="inline-flex items-center justify-center rounded-md border border-line bg-white/90 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-accent/40 hover:text-accent-deep">회원앱 둘러보기</Link>
+              <a href={site.links.reservation} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md bg-accent px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-accent-light">무료 상담 예약</a>
+              <Link href="/location/" className="inline-flex items-center justify-center rounded-md border border-white/40 bg-transparent px-8 py-3.5 text-sm font-bold text-white transition-colors hover:border-accent-light hover:text-accent-light">센터 둘러보기</Link>
             </div>
           </Reveal>
         </div>
@@ -67,18 +69,20 @@ export default function Home() {
     {/* Floating feature card — 모바일은 12~16px만 살짝 겹쳐 자연스럽게 이어지고, 데스크톱은 떠 있는 카드 바 */}
     <section className="relative z-10 mx-auto -mt-4 max-w-6xl px-4 md:-mt-24">
       <Reveal>
-        <div className="grid grid-cols-1 divide-y divide-line rounded-2xl border border-line bg-card shadow-[0_20px_50px_rgba(0,0,0,0.08)] lg:grid-cols-5 lg:divide-x lg:divide-y-0">
+        <div className="grid grid-cols-1 divide-y divide-line rounded-3xl border border-line bg-card shadow-[0_24px_60px_rgba(17,17,17,0.10)] lg:grid-cols-5 lg:divide-x lg:divide-y-0">
           {[
             { icon: 'clipboard', title: '정확한 평가', desc: '체형·움직임·체성분을 먼저 확인' },
             { icon: 'chart', title: '기록 기반 관리', desc: '운동·식단·컨디션 모든 과정을 기록' },
             { icon: 'chat', title: '맞춤 피드백', desc: '기록을 바탕으로 꼼꼼한 피드백' },
             { icon: 'user', title: '1:1 프라이빗', desc: '대표가 직접 지도하는 맞춤 수업' },
             { icon: 'shield', title: '지속 가능한 변화', desc: '단기 변화가 아닌 평생 가는 습관' },
-          ].map(({ icon, title, desc }) => <div key={title} className="flex items-start gap-4 p-6 lg:flex-col lg:gap-3">
-            <FeatureIcon name={icon} />
+          ].map(({ icon, title, desc }) => <div key={title} className="group flex items-start gap-4 p-7 lg:flex-col lg:gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft ring-1 ring-accent/25 transition-colors group-hover:bg-accent group-hover:[&_svg]:text-white">
+              <FeatureIcon name={icon} />
+            </span>
             <div>
-              <h3 className="text-[15px] font-bold text-ink">{title}</h3>
-              <p className="mt-1 text-xs leading-5 text-ink-soft">{desc}</p>
+              <h3 className="text-[15px] font-bold tracking-tight text-ink">{title}</h3>
+              <p className="mt-1.5 text-[13px] leading-6 text-ink-soft">{desc}</p>
             </div>
           </div>)}
         </div>

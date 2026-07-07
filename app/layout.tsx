@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Footer, Header, JsonLd } from './components';
+import { Footer, JsonLd } from './components';
 import { pageMeta, site } from './content';
 import { makeMetadata } from './seo';
+import { SiteHeader } from './ui';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -71,7 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </head>
     <body>
       <JsonLd data={jsonLd} />
-      <Header />
+      <SiteHeader />
       {children}
       <Footer />
     </body>
