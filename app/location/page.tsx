@@ -41,9 +41,20 @@ export default function Page() {
           </div>
         </Reveal>
         <Reveal delay={150}>
-          <Photo spec={photos.locationMap} />
+          {/* Google Maps embed — 초기 center와 marker 모두 site.geo 좌표 사용. 16:9 고정으로 CLS 없음 */}
+          <div className="overflow-hidden rounded-3xl border border-line shadow-card" style={{ aspectRatio: '16/9' }}>
+            <iframe
+              title="테오짐 PT 청라점 위치 지도 - 인천 서구 청라커낼로 280 청라골든프라자"
+              src={`https://maps.google.com/maps?q=${site.geo.lat},${site.geo.lng}&z=17&hl=ko&output=embed`}
+              className="h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button href={site.links.directions}>네이버 지도에서 길찾기</Button>
+            <Button href={`https://www.google.com/maps/search/?api=1&query=${site.geo.lat},${site.geo.lng}`} variant="outline">구글 지도에서 길찾기</Button>
           </div>
         </Reveal>
       </div>

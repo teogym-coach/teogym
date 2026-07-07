@@ -30,9 +30,7 @@ const jsonLd = {
     addressRegion: '인천광역시',
     addressCountry: 'KR',
   },
-  // TODO: 네이버지도/구글지도에서 확인한 실제 위도·경도로 교체한 뒤 주석을 해제하세요.
-  // 임의 좌표를 넣으면 지도 검색에 잘못 노출될 수 있어 확인 전까지 비워둡니다.
-  // geo: { '@type': 'GeoCoordinates', latitude: 0.0, longitude: 0.0 },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
   hasMap: site.links.place,
   openingHoursSpecification: [
     {

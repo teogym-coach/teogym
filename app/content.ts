@@ -5,6 +5,8 @@ export const site = {
   tagline: '몸을 기록하고, 관리하는 곳',
   telephone: '0507-1373-7578',
   address: '인천 서구 청라커낼로 280 청라골든프라자 5층 505호',
+  // Google Maps 기준 청라골든프라자(청라커낼로 280) 좌표 — JSON-LD geo, geo 메타태그, 지도 embed가 모두 이 값을 참조
+  geo: { lat: 37.5291904, lng: 126.6286592 },
   region: '인천 청라',
   businessType: 'PT샵 / 퍼스널트레이닝 / 헬스장',
   keywords: ['테오짐 PT 청라점', '청라 PT', '청라 퍼스널트레이닝', '청라 헬스장', '청라 체형교정', '청라 다이어트 PT', '청라 벌크업 PT', '인천 청라 PT'],
@@ -115,7 +117,6 @@ export const photos = {
   postureBeforeAfter: { src: '/images/posture-before-after.jpg', alt: '테오짐 체형교정 전후 비교 - 어깨 가동 범위가 달라진 모습', ratio: '1/1', label: '체형교정 전후 비교' },
   facility1: { src: '/images/facility-1.jpg', alt: '테오짐 PT 청라점 시설 - 머신 존과 헤링본 마루, 통창 전망', ratio: '4/3', label: '시설 전경 1' },
   facility2: { src: '/images/facility-2.jpg', alt: '테오짐 PT 청라점 시설 - TEO GYM 로고 거울과 프리웨이트 존', ratio: '4/3', label: '시설 전경 2' },
-  locationMap: { src: '/images/location-map.jpg', alt: '테오짐 PT 청라점 위치 지도 - 인천 서구 청라커낼로 280 청라골든프라자 5층 505호', ratio: '16/9', label: '위치 지도 캡처' },
 } as const;
 
 export type PhotoSpec = (typeof photos)[keyof typeof photos];
