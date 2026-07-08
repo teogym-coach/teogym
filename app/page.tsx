@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { preload } from 'react-dom';
 import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps } from './components';
 import { faqs, photos, site } from './content';
 import { faqSchema } from './schema';
@@ -30,25 +31,32 @@ const process = [
 ];
 
 export default function Home() {
+  // LCP 최적화: 히어로 AVIF를 문서 헤드에서 미리 로드 (AVIF 미지원 브라우저는 type을 보고 무시)
+  preload(photos.heroStudio.avif, { as: 'image', type: 'image/avif', fetchPriority: 'high' });
+
   return <main>
     <JsonLd data={faqSchema(faqs.home)} />
 
     {/* Hero — 블랙/차콜 + 브론즈 골드의 프리미엄 다크 히어로 (사진·구도 유지, 톤만 전환) */}
     <section className="relative overflow-hidden bg-night">
-      <img
-        src={photos.heroStudio.src}
-        alt={photos.heroStudio.alt}
-        loading="eager"
-        fetchPriority="high"
-        className="hero-zoom absolute inset-0 h-full w-full object-cover object-[58%_center] md:object-[50%_28%]"
-        style={{ filter: 'contrast(1.06) brightness(0.96)' }}
-      />
+      {/* AVIF → WebP → JPG 순으로 브라우저가 지원하는 최적 포맷을 선택 */}
+      <picture>
+        <source type="image/avif" srcSet={photos.heroStudio.avif} />
+        <source type="image/webp" srcSet={photos.heroStudio.webp} />
+        <img
+          src={photos.heroStudio.src}
+          alt={photos.heroStudio.alt}
+          loading="eager"
+          fetchPriority="high"
+          className="hero-zoom absolute inset-0 h-full w-full object-cover object-[42%_center] md:object-[50%_28%]"
+        />
+      </picture>
       {/* 데스크톱: 왼쪽 다크 그라데이션 — 오른쪽은 공간·기구 디테일이 살아있게 */}
-      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(17,17,17,0.94) 0%, rgba(17,17,17,0.86) 22%, rgba(17,17,17,0.62) 40%, rgba(17,17,17,0.32) 56%, rgba(17,17,17,0.12) 70%, rgba(17,17,17,0.05) 100%)' }} />
-      {/* 모바일: 텍스트 가독성 우선 — 더 강한 다크 오버레이 */}
-      <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(17,17,17,0.84) 0%, rgba(17,17,17,0.74) 45%, rgba(17,17,17,0.52) 75%, rgba(17,17,17,0.62) 100%)' }} />
+      <div aria-hidden className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(90deg, rgba(17,17,17,0.84) 0%, rgba(17,17,17,0.76) 22%, rgba(17,17,17,0.53) 40%, rgba(17,17,17,0.27) 56%, rgba(17,17,17,0.10) 70%, rgba(17,17,17,0.04) 100%)' }} />
+      {/* 모바일: 텍스트 가독성 우선 — 데스크톱보다 강한 다크 오버레이 */}
+      <div aria-hidden className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(180deg, rgba(17,17,17,0.73) 0%, rgba(17,17,17,0.64) 45%, rgba(17,17,17,0.45) 75%, rgba(17,17,17,0.54) 100%)' }} />
       {/* 투명 헤더 가독성용 상단 스크림 */}
-      <div aria-hidden className="absolute inset-x-0 top-0 h-28" style={{ background: 'linear-gradient(180deg, rgba(17,17,17,0.55), rgba(17,17,17,0))' }} />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28" style={{ background: 'linear-gradient(180deg, rgba(17,17,17,0.50), rgba(17,17,17,0))' }} />
       <div className="relative mx-auto flex min-h-[600px] max-w-6xl items-center px-4 pb-24 pt-28 md:min-h-[720px] md:px-10 md:pb-40 md:pt-32">
         <div>
           <Reveal>
@@ -68,6 +76,7 @@ export default function Home() {
 
     {/* Floating feature card — 모바일은 12~16px만 살짝 겹쳐 자연스럽게 이어지고, 데스크톱은 떠 있는 카드 바 */}
     <section className="relative z-10 mx-auto -mt-4 max-w-6xl px-4 md:-mt-24">
+      <h2 className="sr-only">테오짐의 관리 방식</h2>
       <Reveal>
         <div className="grid grid-cols-1 divide-y divide-line rounded-3xl border border-line bg-card shadow-[0_24px_60px_rgba(17,17,17,0.10)] lg:grid-cols-5 lg:divide-x lg:divide-y-0">
           {[

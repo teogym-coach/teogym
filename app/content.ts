@@ -105,7 +105,15 @@ export const pageMeta = {
 // ratio는 CSS aspect-ratio로 고정되어 교체 시 레이아웃이 밀리지 않습니다.
 // ─────────────────────────────────────────────────────────────
 export const photos = {
-  heroStudio: { src: '/images/teogym-hero-04.jpg', alt: '테오짐 PT 청라점 스튜디오 전경 - TEO GYM 로고 거울, 스미스머신과 머신 존, 창밖 청라 도시 전망', ratio: '4/3', label: '스튜디오 대표 사진 (가로)' },
+  // 히어로는 <picture>로 AVIF → WebP → JPG 순서로 서빙됩니다 (scripts/make-hero-05.mjs로 생성).
+  heroStudio: {
+    src: '/images/teogym-hero-05.jpg',
+    avif: '/images/teogym-hero-05.avif',
+    webp: '/images/teogym-hero-05.webp',
+    alt: '테오짐 PT 청라점 스튜디오 - TEO GYM 로고 거울과 스미스머신 프리웨이트 존, 통창 너머 청라 전망',
+    ratio: '4/3',
+    label: '스튜디오 대표 사진 (가로)',
+  },
   coachProfile: { src: '/images/coach-profile.jpg', alt: '테오짐 PT 청라점 김태오 대표 프로필 - TEO GYM 로고 앞에서', ratio: '3/4', label: '김태오 대표 프로필 (세로)' },
   coachLesson: { src: '/images/coach-lesson.jpg', alt: '김태오 대표가 상담 데스크에서 회원과 1:1 상담을 진행하는 모습', ratio: '4/3', label: '1:1 상담 장면' },
   appDashboard: { src: '/images/app-dashboard.jpg', alt: '테오짐 회원 전용 앱으로 수업 기록을 함께 확인하는 모습', ratio: '9/19', label: '회원 앱 사용 장면 (세로)' },
@@ -116,8 +124,8 @@ export const photos = {
   recordsSheet: { src: '/images/records-sheet.jpg', alt: '테오짐 운동기록 작성 화면 - 종목, 세트, 중량, RPE, 자극도를 태블릿에 기록', ratio: '4/3', label: '운동기록 작성 화면' },
   postureBeforeAfter: { src: '/images/posture-before-after.jpg', alt: '테오짐 체형교정 전후 비교 - 어깨 가동 범위가 달라진 모습', ratio: '1/1', label: '체형교정 전후 비교' },
   facility1: { src: '/images/facility-1.jpg', alt: '테오짐 PT 청라점 시설 - 머신 존과 헤링본 마루, 통창 전망', ratio: '4/3', label: '시설 전경 1' },
-  facility2: { src: '/images/facility-2.jpg', alt: '테오짐 PT 청라점 시설 - TEO GYM 로고 거울과 프리웨이트 존', ratio: '4/3', label: '시설 전경 2' },
-  buildingGuide: { src: '/images/building-guide.jpg', alt: '테오짐 PT 청라점 건물 안내 - 청라골든프라자 5층 505호 위치와 간판, 무료 주차·엘리베이터 이용 안내', ratio: '3/2', label: '건물 안내 이미지' },
+  // 시설 전경 2는 새 대표 사진(teogym-hero-05)을 함께 사용합니다 — 같은 로고 거울·프리웨이트 존 구도.
+  facility2: { src: '/images/teogym-hero-05.jpg', alt: '테오짐 PT 청라점 시설 - TEO GYM 로고 거울과 스미스머신 프리웨이트 존, 통창 너머 청라 전망', ratio: '4/3', label: '시설 전경 2' },
 } as const;
 
 export type PhotoSpec = (typeof photos)[keyof typeof photos];

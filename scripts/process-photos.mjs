@@ -62,11 +62,7 @@ const jobs = [
     grade: (img) => img.modulate({ brightness: 1.05 }),
     resize: { width: 1600 },
   },
-  {
-    src: 'photo-originals/시설4.jpg', out: 'public/images/facility-2.jpg',
-    // TEO GYM 로고 거울 벽(4:3 원본 비율): 톤 원본 유지.
-    resize: { width: 1600 },
-  },
+  // facility-2.jpg(시설4.jpg 기반)는 대표 지시로 삭제됨 — teogym-hero-05가 그 자리를 대체 (2026-07-08).
 ];
 
 for (const job of jobs) {
