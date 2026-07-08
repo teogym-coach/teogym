@@ -48,7 +48,7 @@ export default function Home() {
           alt={photos.heroStudio.alt}
           loading="eager"
           fetchPriority="high"
-          className="hero-zoom absolute inset-0 h-full w-full object-cover object-[42%_center] md:object-[50%_28%]"
+          className="hero-zoom absolute inset-0 h-full w-full object-cover object-[52%_center] md:object-[52%_30%] lg:object-[50%_28%]"
         />
       </picture>
       {/* 데스크톱: 왼쪽 다크 그라데이션 — 오른쪽은 공간·기구 디테일이 살아있게 */}
