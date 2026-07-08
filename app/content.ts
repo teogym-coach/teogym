@@ -129,6 +129,8 @@ export const photos = {
   facility1: { src: '/images/facility-1.jpg', alt: '테오짐 PT 청라점 시설 - 머신 존과 헤링본 마루, 통창 전망', ratio: '4/3', label: '시설 전경 1' },
   // 시설 전경 2는 새 대표 사진(teogym-hero-05)을 함께 사용합니다 — 같은 로고 거울·프리웨이트 존 구도.
   facility2: { src: '/images/teogym-hero-05.jpg', alt: '테오짐 PT 청라점 시설 - TEO GYM 로고 거울과 스미스머신 프리웨이트 존, 통창 너머 청라 전망', ratio: '4/3', label: '시설 전경 2' },
+  // 건물 전경 안내 — 원본 건물주차.png 위에 5층 라인을 다시 그린 버전 (scripts/make-building-guide.mjs)
+  buildingGuide: { src: '/images/building-guide-full.jpg', alt: '테오짐 PT 청라점 건물 전경 - 청라골든프라자 5층 테오짐 위치를 골드 라인과 TEO GYM 핀으로 표시', ratio: '1800/959', label: '건물 위치 안내' },
 } as const;
 
 export type PhotoSpec = (typeof photos)[keyof typeof photos];
