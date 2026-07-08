@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { preload } from 'react-dom';
 import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps } from './components';
 import { faqs, photos, site } from './content';
 import { faqSchema } from './schema';
@@ -31,24 +30,35 @@ const process = [
 ];
 
 export default function Home() {
-  // LCP 최적화: 히어로 AVIF를 문서 헤드에서 미리 로드 (AVIF 미지원 브라우저는 type을 보고 무시)
-  preload(photos.heroStudio.avif, { as: 'image', type: 'image/avif', fetchPriority: 'high' });
+  const hero = photos.heroStudio;
 
   return <main>
     <JsonLd data={faqSchema(faqs.home)} />
 
+    {/* LCP 최적화: 뷰포트에 맞는 히어로 AVIF만 미리 로드 (React가 head로 호이스팅, AVIF 미지원 브라우저는 type을 보고 무시) */}
+    <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)" href={hero.mobile.avif} fetchPriority="high" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-width: 1023px)" href={hero.tablet.avif} fetchPriority="high" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 1024px)" href={hero.avif} fetchPriority="high" />
+
     {/* Hero — 블랙/차콜 + 브론즈 골드의 프리미엄 다크 히어로 (사진·구도 유지, 톤만 전환) */}
     <section className="relative overflow-hidden bg-night">
-      {/* AVIF → WebP → JPG 순으로 브라우저가 지원하는 최적 포맷을 선택 */}
+      {/* 뷰포트별 전용 크롭(폰 세로 3:4 / 아이패드 세로 / 가로 원본)을 AVIF → WebP → JPG 순으로 서빙.
+          세로 크롭은 TEO GYM 로고가 헤더와 헤드라인 사이 여백에 오도록 설계됨 (scripts/make-hero-05.mjs) */}
       <picture>
-        <source type="image/avif" srcSet={photos.heroStudio.avif} />
-        <source type="image/webp" srcSet={photos.heroStudio.webp} />
+        <source media="(max-width: 767px)" type="image/avif" srcSet={hero.mobile.avif} />
+        <source media="(max-width: 767px)" type="image/webp" srcSet={hero.mobile.webp} />
+        <source media="(max-width: 767px)" srcSet={hero.mobile.src} />
+        <source media="(max-width: 1023px)" type="image/avif" srcSet={hero.tablet.avif} />
+        <source media="(max-width: 1023px)" type="image/webp" srcSet={hero.tablet.webp} />
+        <source media="(max-width: 1023px)" srcSet={hero.tablet.src} />
+        <source type="image/avif" srcSet={hero.avif} />
+        <source type="image/webp" srcSet={hero.webp} />
         <img
-          src={photos.heroStudio.src}
-          alt={photos.heroStudio.alt}
+          src={hero.src}
+          alt={hero.alt}
           loading="eager"
           fetchPriority="high"
-          className="hero-zoom absolute inset-0 h-full w-full object-cover object-[52%_center] md:object-[52%_30%] lg:object-[50%_28%]"
+          className="hero-zoom absolute inset-0 h-full w-full object-cover object-[50%_20%] lg:object-[50%_28%]"
         />
       </picture>
       {/* 데스크톱: 왼쪽 다크 그라데이션 — 오른쪽은 공간·기구 디테일이 살아있게 */}

@@ -105,11 +105,14 @@ export const pageMeta = {
 // ratio는 CSS aspect-ratio로 고정되어 교체 시 레이아웃이 밀리지 않습니다.
 // ─────────────────────────────────────────────────────────────
 export const photos = {
-  // 히어로는 <picture>로 AVIF → WebP → JPG 순서로 서빙됩니다 (scripts/make-hero-05.mjs로 생성).
+  // 히어로는 <picture>로 뷰포트별(폰 세로/아이패드 세로/가로) 전용 크롭을
+  // AVIF → WebP → JPG 순서로 서빙합니다 (scripts/make-hero-05.mjs로 생성).
   heroStudio: {
     src: '/images/teogym-hero-05.jpg',
     avif: '/images/teogym-hero-05.avif',
     webp: '/images/teogym-hero-05.webp',
+    tablet: { src: '/images/teogym-hero-05-tablet.jpg', avif: '/images/teogym-hero-05-tablet.avif', webp: '/images/teogym-hero-05-tablet.webp' },
+    mobile: { src: '/images/teogym-hero-05-mobile.jpg', avif: '/images/teogym-hero-05-mobile.avif', webp: '/images/teogym-hero-05-mobile.webp' },
     alt: '테오짐 PT 청라점 스튜디오 - TEO GYM 로고 거울과 스미스머신 프리웨이트 존, 통창 너머 청라 전망',
     ratio: '4/3',
     label: '스튜디오 대표 사진 (가로)',
