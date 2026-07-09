@@ -1,3 +1,10 @@
+// 상단 메뉴 항목 — href만 있으면 일반 링크, children이 있으면 드롭다운 메뉴.
+export type NavItem = {
+  readonly label: string;
+  readonly href?: string;
+  readonly children?: readonly (readonly [string, string])[];
+};
+
 export const site = {
   name: '테오짐 PT 청라점',
   url: 'https://teogym.pages.dev',
@@ -22,9 +29,16 @@ export const site = {
     closed: '일요일 · 공휴일 휴무',
     note: '예약제로 운영합니다. 방문 전 네이버 예약 또는 전화로 시간을 확인해주세요.',
   },
+  // 상단 메뉴 — children이 있는 항목은 드롭다운(프로그램)으로 렌더링됩니다.
+  // 운동기록·가격 페이지는 유지하되 상단 메뉴에서는 노출하지 않습니다(푸터/본문 링크로만 접근).
   nav: [
-    ['메인', '/'], ['대표 소개', '/about/'], ['체형교정 PT', '/posture/'], ['다이어트 PT', '/diet/'], ['벌크업 PT', '/bulk-up/'], ['운동기록', '/records/'], ['회원 앱', '/app/'], ['가격', '/pricing/'], ['후기/사례', '/cases/'], ['오시는 길', '/location/'],
-  ] as const,
+    { label: '메인', href: '/' },
+    { label: '프로그램', children: [['체형교정 PT', '/posture/'], ['다이어트 PT', '/diet/'], ['벌크업 PT', '/bulk-up/']] },
+    { label: '회원 전용 앱', href: '/app/' },
+    { label: '성공 사례', href: '/cases/' },
+    { label: '대표 소개', href: '/about/' },
+    { label: '오시는 길', href: '/location/' },
+  ] as readonly NavItem[],
   links: {
     phone: 'tel:050713737578',
     reservation: 'https://m.booking.naver.com/booking/6/bizes/1369304',
