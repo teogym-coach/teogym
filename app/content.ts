@@ -32,11 +32,10 @@ export const site = {
   // 상단 메뉴 — children이 있는 항목은 드롭다운(프로그램)으로 렌더링됩니다.
   // 운동기록·가격 페이지는 유지하되 상단 메뉴에서는 노출하지 않습니다(푸터/본문 링크로만 접근).
   nav: [
-    { label: '메인', href: '/' },
+    { label: '대표 소개', href: '/about/' },
     { label: '프로그램', children: [['체형교정 PT', '/posture/'], ['다이어트 PT', '/diet/'], ['벌크업 PT', '/bulk-up/']] },
     { label: '회원 전용 앱', href: '/app/' },
     { label: '성공 사례', href: '/cases/' },
-    { label: '대표 소개', href: '/about/' },
     { label: '오시는 길', href: '/location/' },
   ] as readonly NavItem[],
   links: {
