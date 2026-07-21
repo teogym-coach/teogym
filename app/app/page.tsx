@@ -1,4 +1,4 @@
-import { CTA, FeatureList, JsonLd, PageHero, Photo, RelatedLinks, Section, SectionTitle } from '../components';
+import { CTA, FeatureList, JsonLd, PageHero, Photo, RelatedLinks, Section, SectionTitle, SystemLink } from '../components';
 import { pageMeta, photos } from '../content';
 import { breadcrumbSchema } from '../schema';
 import { makeMetadata } from '../seo';
@@ -42,6 +42,8 @@ export default function Page() {
       <SectionTitle eyebrow="More" title="함께 보면 좋은 페이지" />
       <div className="mt-10"><Reveal><RelatedLinks items={related} /></Reveal></div>
     </Section>
+
+    <SystemLink text="회원 전용 앱은 테오짐 8단계 관리 시스템의 운동 기록과 변화 분석을 연결합니다." label="전체 PT 관리 시스템 보기" />
 
     <CTA />
   </main>;

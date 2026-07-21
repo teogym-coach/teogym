@@ -1,4 +1,4 @@
-import { CTA, FaqList, FeatureList, JsonLd, PageHero, Photo, RelatedLinks, Section, SectionTitle, Steps } from '../components';
+import { CTA, FaqList, FeatureList, JsonLd, PageHero, Photo, RelatedLinks, Section, SectionTitle, Steps, SystemLink } from '../components';
 import { faqs, pageMeta, photos } from '../content';
 import { breadcrumbSchema, faqSchema, serviceSchema } from '../schema';
 import { makeMetadata } from '../seo';
@@ -57,6 +57,8 @@ export default function Page() {
       <SectionTitle eyebrow="More" title="함께 보면 좋은 페이지" />
       <div className="mt-10"><Reveal><RelatedLinks items={related} /></Reveal></div>
     </Section>
+
+    <SystemLink text="테오짐의 상담부터 변화 분석까지 전체 관리 과정이 궁금하신가요?" />
 
     <CTA />
   </main>;

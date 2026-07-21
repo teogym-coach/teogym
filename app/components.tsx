@@ -47,13 +47,13 @@ export function Footer() {
 }
 
 // ─── CTA ─────────────────────────────────────────────────────
-export function CTA() {
+export function CTA({ title, desc }: { title?: React.ReactNode; desc?: string } = {}) {
   return <section className="mx-auto max-w-6xl px-4 py-16">
     <Reveal>
       <div className="rounded-3xl border border-accent/25 bg-sand p-8 md:p-12">
         <p className="text-sm font-bold uppercase tracking-widest text-accent">Reservation</p>
-        <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-snug text-ink md:text-4xl">지금 몸 상태와 목표부터<br className="hidden md:block" /> 상담해보세요.</h2>
-        <p className="mt-4 max-w-2xl text-ink-soft">첫 상담에서 체형, 운동 경험, 체중 변화, 생활패턴을 확인한 뒤 필요한 관리 방향을 안내합니다.</p>
+        <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-snug text-ink md:text-4xl">{title ?? <>지금 몸 상태와 목표부터<br className="hidden md:block" /> 상담해보세요.</>}</h2>
+        <p className="mt-4 max-w-2xl text-ink-soft">{desc ?? '첫 상담에서 체형, 운동 경험, 체중 변화, 생활패턴을 확인한 뒤 필요한 관리 방향을 안내합니다.'}</p>
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Button href={site.links.reservation}>네이버 예약</Button>
           <Button href={site.links.phone} variant="outline">전화 상담</Button>
@@ -63,6 +63,20 @@ export function CTA() {
       </div>
     </Reveal>
   </section>;
+}
+
+// ─── PT 시스템 안내 연결 (보조 CTA) ────────────────────────────
+// 프로그램/회원앱 페이지 본문 하단, 주 CTA(상담 예약) 직전에 배치해
+// /system/ 페이지로 자연스럽게 연결합니다. outline 버튼이라 예약 버튼과 혼동되지 않습니다.
+export function SystemLink({ text, label = '8단계 PT 시스템 확인하기' }: { text: string; label?: string }) {
+  return <Section>
+    <Reveal>
+      <div className="mx-auto max-w-2xl rounded-2xl border border-line bg-card p-6 text-center shadow-card md:p-8">
+        <p className="leading-7 text-ink-soft">{text}</p>
+        <div className="mt-5 flex justify-center"><Button href="/system/" variant="outline">{label}</Button></div>
+      </div>
+    </Reveal>
+  </Section>;
 }
 
 // ─── Button / TextLink ───────────────────────────────────────

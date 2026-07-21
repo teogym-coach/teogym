@@ -134,6 +134,18 @@ export default function Home() {
       <div className="mt-10"><Reveal><Steps items={process} /></Reveal></div>
     </Section>
 
+    {/* PT 시스템 소개 — 8단계 상세 페이지로 연결 */}
+    <Section tone="sand">
+      <div className="grid items-center gap-10 md:grid-cols-[1.3fr_1fr] md:gap-12">
+        <Reveal>
+          <SectionTitle eyebrow="System" title="운동 기록이 다음 수업으로 이어집니다" desc="테오짐 PT 청라점은 상담과 움직임 평가부터 운동 기록, 피드백, 다음 수업 설계, 변화 분석까지 하나의 관리 시스템으로 연결합니다." />
+        </Reveal>
+        <Reveal delay={150}>
+          <div className="flex md:justify-end"><Button href="/system/" variant="outline">테오짐 PT 시스템 보기</Button></div>
+        </Reveal>
+      </div>
+    </Section>
+
     {/* 가격 & 후기 */}
     <Section>
       <div className="grid gap-4 md:grid-cols-2">
