@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -166,6 +167,49 @@ export function CountUp({ end, suffix = '', prefix = '', duration = 1200 }: { en
   }, [started, end, duration]);
 
   return <span ref={ref}>{prefix}{value.toLocaleString('ko-KR')}{suffix}</span>;
+}
+
+// ─── Mockup Carousel ─────────────────────────────────────────
+// Record & Care 섹션 전용: 브랜드 컨셉 목업 3장을 부드러운 opacity crossfade로
+// 자동 전환합니다. prefers-reduced-motion 사용자는 자동 전환을 멈추고 첫 장만 보여줍니다.
+export function MockupCarousel({ images }: { images: readonly { src: string; alt: string; width: number; height: number }[] }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = setInterval(() => setIndex((i) => (i + 1) % images.length), 4000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <div>
+      <div className="relative w-full overflow-hidden rounded-3xl border border-line bg-card shadow-card" style={{ aspectRatio: `${images[0].width}/${images[0].height}` }}>
+        {images.map((img, i) => (
+          <Image
+            key={img.src}
+            src={img.src}
+            alt={img.alt}
+            width={img.width}
+            height={img.height}
+            priority={i === 0}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[600ms] ${i === index ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
+      </div>
+      <div className="mt-4 flex justify-center gap-2">
+        {images.map((img, i) => (
+          <button
+            key={img.src}
+            type="button"
+            aria-label={`${i + 1}번째 이미지 보기`}
+            aria-current={i === index}
+            onClick={() => setIndex(i)}
+            className={`h-2 rounded-full transition-all ${i === index ? 'w-6 bg-accent' : 'w-2 bg-line'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 // ─── Mobile Menu ─────────────────────────────────────────────

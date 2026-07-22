@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps } from './components';
-import { faqs, photos, site } from './content';
+import { faqs, mockups, photos, site } from './content';
 import { faqSchema } from './schema';
-import { Reveal } from './ui';
+import { MockupCarousel, Reveal } from './ui';
 
 // 히어로 하단 feature 카드용 골드 라인 아이콘
 function FeatureIcon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
-    clipboard: <><rect x="5" y="4" width="14" height="17" rx="2" /><path d="M9 4.5V3h6v1.5" /><path d="m9 13 2 2 4-4" /></>,
+    activity: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
     chart: <><path d="M4 19h16" /><path d="M7 16v-4" /><path d="M12 16V9" /><path d="M17 16V5" /></>,
-    chat: <><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5Z" /><path d="M9 12h.01M13 12h.01M17 12h.01" /></>,
+    app: <><rect x="7" y="2" width="10" height="20" rx="2" /><path d="M11 18h2" /></>,
     user: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></>,
-    shield: <><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></>,
+    trend: <><path d="M4 17 10 11 14 15 21 7" /><path d="M15 7h6v6" /></>,
   };
   return <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0 text-accent-deep transition-colors">{paths[name]}</svg>;
 }
@@ -23,11 +23,13 @@ const programs = [
 ];
 
 const process = [
-  { title: '무료 체험 상담', desc: '체형, 운동 경험, 체중 변화, 생활패턴을 확인합니다.' },
-  { title: '방향 설계', desc: '몸 상태와 목표에 맞는 운동 방향과 관리 계획을 안내합니다.' },
-  { title: '1:1 수업', desc: '대표가 직접 수업하고 매 수업의 수행 내용을 기록합니다.' },
-  { title: '기록과 피드백', desc: '운동기록과 체중 변화를 회원 전용 앱에서 함께 확인합니다.' },
+  { icon: 'activity', title: '무료 체험 상담', desc: '체형, 운동 경험, 체중 변화, 생활패턴을 확인합니다.' },
+  { icon: 'target', title: '방향 설계', desc: '몸 상태와 목표에 맞는 운동 방향과 관리 계획을 안내합니다.' },
+  { icon: 'dumbbell', title: '1:1 수업', desc: '대표가 직접 수업하고 매 수업의 수행 내용을 기록합니다.' },
+  { icon: 'trend', title: '기록과 피드백', desc: '운동기록과 체중 변화를 회원 전용 앱에서 함께 확인합니다.' },
 ];
+
+const caseCategories = ['다이어트 변화 사례', '체형교정 사례', '벌크업 사례', '운동기록 관리 사례', '회원 전용 앱 활용 사례'];
 
 export default function Home() {
   const hero = photos.heroStudio;
@@ -90,11 +92,11 @@ export default function Home() {
       <Reveal>
         <div className="grid grid-cols-1 divide-y divide-line rounded-3xl border border-line bg-card shadow-[0_24px_60px_rgba(17,17,17,0.10)] lg:grid-cols-5 lg:divide-x lg:divide-y-0">
           {[
-            { icon: 'clipboard', title: '정확한 평가', desc: '체형·움직임·체성분을 먼저 확인' },
-            { icon: 'chart', title: '기록 기반 관리', desc: '운동·식단·컨디션 모든 과정을 기록' },
-            { icon: 'chat', title: '맞춤 피드백', desc: '기록을 바탕으로 꼼꼼한 피드백' },
-            { icon: 'user', title: '1:1 프라이빗', desc: '대표가 직접 지도하는 맞춤 수업' },
-            { icon: 'shield', title: '지속 가능한 변화', desc: '단기 변화가 아닌 평생 가는 습관' },
+            { icon: 'activity', title: '움직임 평가', desc: '몸의 움직임과 체형을 먼저 확인합니다.' },
+            { icon: 'chart', title: '운동기록 관리', desc: '운동 기록이 다음 수업으로 이어집니다.' },
+            { icon: 'app', title: '회원 전용 앱', desc: '운동 기록과 변화를 언제든 확인합니다.' },
+            { icon: 'user', title: '대표 직접 수업', desc: '모든 PT를 대표가 직접 진행합니다.' },
+            { icon: 'trend', title: '변화 분석', desc: '기록을 바탕으로 변화를 관리합니다.' },
           ].map(({ icon, title, desc }) => <div key={title} className="group flex items-start gap-4 p-7 lg:flex-col lg:gap-4">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft ring-1 ring-accent/25 transition-colors group-hover:bg-accent group-hover:[&_svg]:text-white">
               <FeatureIcon name={icon} />
@@ -118,13 +120,14 @@ export default function Home() {
     <Section>
       <div className="grid items-center gap-12 md:grid-cols-2">
         <Reveal>
-          <SectionTitle eyebrow="Record & Care" title="수업이 끝나도 기록은 남습니다" desc="종목, 세트, 횟수, 중량, RPE를 매 수업 기록하고 다음 수업 루틴과 변화 추적에 연결합니다. 체중 변화, 운동 기록, 수업 히스토리는 회원 전용 앱에서 언제든 확인할 수 있습니다." />
+          <SectionTitle eyebrow="Record & Care" title="기록이 다음 수업을 만듭니다" desc="매 수업의 운동 종목, 세트, 횟수, 중량, 몸 상태를 기록합니다. 기록은 다음 수업의 운동 구성과 강도 조절에 반영됩니다. 회원은 전용 앱을 통해 자신의 운동 이력과 변화 과정을 언제든 확인할 수 있습니다." />
+          <p className="mt-4 text-sm leading-7 text-ink-soft">기록은 저장이 목적이 아니라 더 좋은 다음 수업을 만드는 기준입니다.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button href="/records/" variant="outline">운동기록 관리</Button>
             <Button href="/app/" variant="outline">회원 전용 앱</Button>
           </div>
         </Reveal>
-        <Reveal delay={150}><div className="mx-auto w-full max-w-[280px]"><Photo spec={photos.appDashboard} /></div></Reveal>
+        <Reveal delay={150}><div className="mx-auto w-full max-w-[280px]"><MockupCarousel images={mockups} /></div></Reveal>
       </div>
     </Section>
 
@@ -146,14 +149,23 @@ export default function Home() {
       </div>
     </Section>
 
-    {/* 가격 & 후기 */}
+    {/* 가격 안내 */}
     <Section>
-      <div className="grid gap-4 md:grid-cols-2">
-        <Reveal>
-          <Card title="가격 안내" href="/pricing/">상담에서 몸 상태와 목표를 확인한 뒤 목적에 맞는 수업 구성과 신규 회원 첫 등록 혜택을 안내드립니다.</Card>
-        </Reveal>
-        <Reveal delay={100}>
-          <Card title="후기와 사례" href="/cases/">허위 후기를 만들지 않습니다. 실제 공개 가능한 사례만 블로그로 연결합니다.</Card>
+      <div className="mx-auto max-w-2xl">
+        <Reveal><Card title="가격 안내" href="/pricing/">상담에서 몸 상태와 목표를 확인한 뒤 목적에 맞는 수업 구성과 신규 회원 첫 등록 혜택을 안내드립니다.</Card></Reveal>
+      </div>
+    </Section>
+
+    {/* 실제 사례 — 관리 시스템 → 실제 사례 → FAQ 순서로 신뢰를 쌓도록 FAQ 바로 위에 배치 */}
+    <Section tone="sand">
+      <div className="grid items-center gap-12 md:grid-cols-2">
+        <Reveal><div className="mx-auto w-full max-w-md"><Photo spec={photos.postureBeforeAfter} /></div></Reveal>
+        <Reveal delay={150}>
+          <SectionTitle eyebrow="Real Cases" title="실제 사례로 확인하세요" desc="허위 후기를 만들지 않습니다. 실제 공개 가능한 사례만 카테고리별로 블로그에 연결합니다." />
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {caseCategories.map((title) => <li key={title} className="rounded-full border border-line bg-card px-4 py-2 text-sm font-semibold text-ink-soft">{title}</li>)}
+          </ul>
+          <div className="mt-8"><Button href="/cases/" variant="outline">사례 더 보기</Button></div>
         </Reveal>
       </div>
     </Section>

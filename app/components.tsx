@@ -140,11 +140,26 @@ export function FeatureList({ items }: { items: readonly string[] }) {
 }
 
 // ─── 진행 단계 ───────────────────────────────────────────────
-export function Steps({ items }: { items: readonly { title: string; desc: string }[] }) {
+// 아이콘은 system/page.tsx의 SystemIcon과 같은 라인 스타일(1.6 stroke, round cap)로 통일합니다.
+const stepIconPaths: Record<string, React.ReactNode> = {
+  activity: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
+  target: <><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="0.8" fill="currentColor" stroke="none" /></>,
+  dumbbell: <><path d="M4 9v6" /><path d="M20 9v6" /><path d="M2 10v4" /><path d="M22 10v4" /><path d="M4 12h16" /></>,
+  trend: <><path d="M4 17 10 11 14 15 21 7" /><path d="M15 7h6v6" /></>,
+};
+
+function StepIcon({ name }: { name: string }) {
+  return <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0 text-accent-deep">{stepIconPaths[name]}</svg>;
+}
+
+export function Steps({ items }: { items: readonly { title: string; desc: string; icon?: string }[] }) {
   return <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {items.map((step, i) => <li key={step.title} className="rounded-2xl border border-line bg-card p-6 shadow-card">
-      <p className="text-sm font-extrabold text-accent">{String(i + 1).padStart(2, '0')}</p>
-      <h3 className="mt-2 font-bold text-ink">{step.title}</h3>
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-extrabold text-accent">{String(i + 1).padStart(2, '0')}</p>
+        {step.icon && <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft ring-1 ring-accent/25"><StepIcon name={step.icon} /></span>}
+      </div>
+      <h3 className="mt-3 font-bold text-ink">{step.title}</h3>
       <p className="mt-2 text-sm leading-6 text-ink-soft">{step.desc}</p>
     </li>)}
   </ol>;
