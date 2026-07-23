@@ -149,10 +149,10 @@ export default function Home() {
       </div>
     </Section>
 
-    {/* 가격 안내 */}
+    {/* 대표 직접 상담 전환 카드 */}
     <Section>
       <div className="mx-auto max-w-2xl">
-        <Reveal><Card title="가격 안내" href="/pricing/">상담에서 몸 상태와 목표를 확인한 뒤 목적에 맞는 수업 구성과 신규 회원 첫 등록 혜택을 안내드립니다.</Card></Reveal>
+        <Reveal><Card title="대표 직접 상담" href={site.links.reservation} ctaLabel="네이버 예약 →">운동 목적과 몸 상태를 먼저 확인한 뒤<br />회원에게 맞는 운동 방향을 함께 제안드립니다.</Card></Reveal>
       </div>
     </Section>
 

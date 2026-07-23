@@ -123,13 +123,15 @@ export function SectionTitle({ eyebrow, title, desc }: { eyebrow?: string; title
 }
 
 // ─── Card ────────────────────────────────────────────────────
-export function Card({ title, children, href }: { title: string; children: React.ReactNode; href?: string }) {
+export function Card({ title, children, href, ctaLabel = '자세히 보기 →' }: { title: string; children: React.ReactNode; href?: string; ctaLabel?: string }) {
   const body = <div className={`h-full rounded-2xl border border-line bg-card p-6 shadow-card ${href ? 'lift hover:shadow-lift' : ''}`}>
     <h3 className="text-lg font-bold text-ink">{title}</h3>
     <div className="mt-3 leading-7 text-ink-soft">{children}</div>
-    {href && <p className="mt-4 text-sm font-bold text-accent-deep">자세히 보기 →</p>}
+    {href && <p className="mt-4 text-sm font-bold text-accent-deep">{ctaLabel}</p>}
   </div>;
-  return href ? <Link href={href} className="block h-full">{body}</Link> : body;
+  if (!href) return body;
+  const externalProps = isExternalHref(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+  return <Link href={href} className="block h-full" {...externalProps}>{body}</Link>;
 }
 
 // ─── Feature List (ul/li — 헤딩 구조를 어지럽히지 않음) ──────
