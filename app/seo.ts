@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { site } from './content';
 
-export const GOOGLE_SITE_VERIFICATION = 'dykqPkb45TM-_sOvKMBpKhMR1dGlTKMbRSzAcbSa9x0';
+export const GOOGLE_SITE_VERIFICATION = [
+  'dykqPkb45TM-_sOvKMBpKhMR1dGlTKMbRSzAcbSa9x0',
+  'kSVvpVRupcudeiQH-XtvtvfvhlJXY8CuKq3uEYuEwA0',
+];
 export const BING_SITE_VERIFICATION = 'E8A9918482E1CA0F06BB325DAB1C7D36';
 
 export const NAVER_SITE_VERIFICATION = '3176213ef9af725cf2f0c73eb3ed9d3ef8fbe2d1';
