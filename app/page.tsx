@@ -137,14 +137,19 @@ export default function Home() {
       <div className="mt-10"><Reveal><Steps items={process} /></Reveal></div>
     </Section>
 
-    {/* PT 시스템 소개 — 8단계 상세 페이지로 연결 */}
+    {/* 운동기록/PT 시스템 페이지로 연결하는 2카드 섹션 */}
     <Section tone="sand">
-      <div className="grid items-center gap-10 md:grid-cols-[1.3fr_1fr] md:gap-12">
+      <SectionTitle eyebrow="System" title="테오짐의 수업은 기록으로 이어집니다" />
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
         <Reveal>
-          <SectionTitle eyebrow="System" title="운동 기록이 다음 수업으로 이어집니다" desc="테오짐 PT 청라점은 상담과 움직임 평가부터 운동 기록, 피드백, 다음 수업 설계, 변화 분석까지 하나의 관리 시스템으로 연결합니다." />
+          <Card title="왜 모든 수업을 기록할까요?" href="/records/" ctaLabel="운동기록 관리 보기 →">
+            운동 내용과 회원 반응을 기록하고, 이전 수업과 비교해 다음 수업을 준비합니다.
+          </Card>
         </Reveal>
-        <Reveal delay={150}>
-          <div className="flex md:justify-end"><Button href="/system/" variant="outline">테오짐 PT 시스템 보기</Button></div>
+        <Reveal delay={100}>
+          <Card title="상담부터 다음 수업까지" href="/system/" ctaLabel="테오짐 PT 시스템 보기 →">
+            상담, 움직임 평가, 목표 설정, 수업, 피드백이 하나의 과정으로 연결됩니다.
+          </Card>
         </Reveal>
       </div>
     </Section>

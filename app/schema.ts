@@ -28,6 +28,17 @@ export function faqSchema(faqs: readonly Faq[]) {
   };
 }
 
+export function personSchema(person: { name: string; jobTitle: string; path: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: person.name,
+    jobTitle: person.jobTitle,
+    url: new URL(person.path, site.url).toString(),
+    worksFor: { '@id': `${site.url}/#localbusiness` },
+  };
+}
+
 export function serviceSchema(service: { name: string; description: string; path: string }) {
   return {
     '@context': 'https://schema.org',

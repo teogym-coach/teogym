@@ -47,19 +47,25 @@ export function Footer() {
 }
 
 // ─── CTA ─────────────────────────────────────────────────────
-export function CTA({ title, desc }: { title?: React.ReactNode; desc?: string } = {}) {
+// buttons를 생략하면 기본 4버튼(네이버 예약/전화 상담/네이버 톡톡/찾아오시는 길) 그리드를 그대로 사용합니다.
+// buttons를 전달하면 해당 페이지 전용 버튼 구성으로 교체되고, 모바일 세로 · 데스크톱 가로 배치로 렌더링됩니다.
+export function CTA({ title, desc, buttons }: { title?: React.ReactNode; desc?: string; buttons?: readonly { label: string; href: string; variant?: 'primary' | 'outline' }[] } = {}) {
   return <section className="mx-auto max-w-6xl px-4 py-16">
     <Reveal>
       <div className="rounded-3xl border border-accent/25 bg-sand p-8 md:p-12">
         <p className="text-sm font-bold uppercase tracking-widest text-accent">Reservation</p>
         <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-snug text-ink md:text-4xl">{title ?? <>지금 몸 상태와 목표부터<br className="hidden md:block" /> 상담해보세요.</>}</h2>
         <p className="mt-4 max-w-2xl text-ink-soft">{desc ?? '첫 상담에서 체형, 운동 경험, 체중 변화, 생활패턴을 확인한 뒤 필요한 관리 방향을 안내합니다.'}</p>
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <Button href={site.links.reservation}>네이버 예약</Button>
-          <Button href={site.links.phone} variant="outline">전화 상담</Button>
-          <Button href={site.links.talk} variant="outline">네이버 톡톡</Button>
-          <Button href={site.links.directions} variant="outline">찾아오시는 길</Button>
-        </div>
+        {buttons
+          ? <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {buttons.map(({ label, href, variant }) => <Button key={label} href={href} variant={variant ?? 'outline'}>{label}</Button>)}
+          </div>
+          : <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <Button href={site.links.reservation}>네이버 예약</Button>
+            <Button href={site.links.phone} variant="outline">전화 상담</Button>
+            <Button href={site.links.talk} variant="outline">네이버 톡톡</Button>
+            <Button href={site.links.directions} variant="outline">찾아오시는 길</Button>
+          </div>}
       </div>
     </Reveal>
   </section>;
@@ -181,6 +187,28 @@ export function FaqList({ items }: { items: readonly Faq[] }) {
 export function RelatedLinks({ items }: { items: readonly { title: string; desc: string; href: string }[] }) {
   return <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {items.map(({ title, desc, href }) => <Card key={href} title={title} href={href}>{desc}</Card>)}
+  </div>;
+}
+
+// ─── 비교표 (모바일은 가로 스크롤) ────────────────────────────
+export function CompareTable({ leftLabel, rightLabel, rows }: { leftLabel: string; rightLabel: string; rows: readonly { item: string; left: string; right: string }[] }) {
+  return <div className="overflow-x-auto rounded-2xl border border-line bg-card shadow-card">
+    <table className="w-full min-w-[640px] border-collapse text-sm">
+      <thead>
+        <tr className="border-b border-line bg-sand text-left">
+          <th scope="col" className="p-4 font-bold text-ink">확인 항목</th>
+          <th scope="col" className="p-4 font-bold text-ink-soft">{leftLabel}</th>
+          <th scope="col" className="p-4 font-bold text-accent-deep">{rightLabel}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(({ item, left, right }) => <tr key={item} className="border-b border-line last:border-0">
+          <th scope="row" className="p-4 text-left font-semibold text-ink">{item}</th>
+          <td className="p-4 align-top leading-6 text-ink-soft">{left}</td>
+          <td className="p-4 align-top leading-6 text-ink">{right}</td>
+        </tr>)}
+      </tbody>
+    </table>
   </div>;
 }
 
