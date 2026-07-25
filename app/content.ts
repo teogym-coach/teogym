@@ -66,8 +66,8 @@ export const pageMeta = {
     path: '/',
   },
   about: {
-    title: '대표 소개 | 테오짐 PT 청라점',
-    description: '김태오 대표가 직접 상담하고 수업하는 청라 1:1 PT 스튜디오. 실패 원인을 찾고 기록이 남는 PT를 설계합니다.',
+    title: '김태오 대표 소개 | 테오짐 PT 청라점',
+    description: '테오짐 PT 청라점 김태오 대표가 직접 상담과 수업을 진행하는 이유와 운동기록, 회원 전용 앱을 활용해 다음 수업을 준비하는 원칙을 소개합니다.',
     path: '/about/',
   },
   posture: {
@@ -91,8 +91,8 @@ export const pageMeta = {
     path: '/records/',
   },
   app: {
-    title: '회원 전용 앱 | 테오짐 PT 청라점',
-    description: '체중 변화, 운동 기록, 건강관리 허브, 루틴 추천, 수업 히스토리를 한 곳에서 관리하는 테오짐 회원 전용 시스템입니다.',
+    title: '테오짐 회원 전용 앱 | 수업 기록과 운동 과정 확인',
+    description: '테오짐 회원이 최근 수업 기록과 운동 내용을 확인하고, 수업 후 몸 상태와 강도 체감을 남겨 다음 수업 준비에 활용하는 회원 전용 앱을 소개합니다.',
     path: '/app/',
   },
   pricing: {

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps } from './components';
+import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps, TextLink } from './components';
 import { faqs, mockups, photos, site } from './content';
 import { faqSchema } from './schema';
 import { MockupCarousel, Reveal } from './ui';
@@ -74,7 +74,7 @@ export default function Home() {
           <Reveal>
             <h1 className="max-w-[560px] text-4xl font-extrabold leading-[1.28] tracking-tight text-white md:max-w-[680px] md:text-6xl md:leading-[1.3] lg:text-7xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
             <p className="mt-6 text-lg font-medium text-white md:mt-8">체형교정 · 다이어트 · 벌크업</p>
-            <p className="mt-4 max-w-[460px] text-base leading-7 text-mist">대표가 직접 평가하고<br />운동기록과 변화를 끝까지 관리합니다.</p>
+            <p className="mt-4 max-w-[460px] text-base leading-7 text-mist">테오짐 PT 청라점은 김태오 대표가 상담과 수업을 직접 진행합니다.<br />움직임을 확인하고 운동기록을 남겨 다음 수업을 준비합니다.</p>
           </Reveal>
           <Reveal delay={150}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row md:mt-10">
@@ -152,6 +152,7 @@ export default function Home() {
           </Card>
         </Reveal>
       </div>
+      <p className="mt-6 text-center text-sm"><TextLink href="/about/">김태오 대표의 수업 원칙 보기 →</TextLink></p>
     </Section>
 
     {/* 대표 직접 상담 전환 카드 */}

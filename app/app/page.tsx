@@ -22,7 +22,7 @@ export default function Page() {
     <Section>
       <div className="grid items-center gap-12 md:grid-cols-2">
         <Reveal>
-          <SectionTitle eyebrow="Member App" title="내 몸의 변화를 언제든 확인" desc="수업에서 남긴 운동기록, 직접 기록하는 공복체중, 대표가 제안하는 루틴까지 한 곳에 모입니다. 오늘의 컨디셔닝을 확인하고 다음 수업을 준비하세요." />
+          <SectionTitle eyebrow="Member App" title="내 몸의 변화를 언제든 확인" desc="수업에서 남긴 운동기록과 대표가 제안하는 루틴을 회원 전용 앱에서 확인할 수 있습니다. 회원은 수업 후 몸 상태와 운동 강도 체감, 메모를 앱에 남길 수 있고, 트레이너는 수업 기록과 회원 피드백을 함께 확인해 다음 수업의 운동 부위, 종목과 강도를 준비합니다." />
         </Reveal>
         <Reveal delay={150}>
           <div className="mx-auto grid w-full max-w-md grid-cols-2 gap-4">

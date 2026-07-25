@@ -15,7 +15,7 @@ const jsonLd = {
   '@type': ['LocalBusiness', 'SportsActivityLocation'],
   '@id': `${site.url}/#localbusiness`,
   name: site.name,
-  alternateName: ['테오짐', 'TEOGYM PT Cheongna'],
+  alternateName: ['테오짐', 'TEO GYM'],
   description: site.description,
   url: site.url,
   telephone: site.telephone,

@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Button, CTA, Card, CompareTable, FaqList, FeatureList, JsonLd, PageHero, Photo, Section, SectionTitle, TextLink } from '../components';
 import { faqs, pageMeta, photos } from '../content';
-import { breadcrumbSchema, faqSchema, personSchema } from '../schema';
+import { breadcrumbSchema, faqSchema } from '../schema';
 import { makeMetadata } from '../seo';
 import { Reveal } from '../ui';
 
@@ -86,12 +86,11 @@ const stepDetails: readonly { title: string; intro: string; items: readonly stri
 ];
 
 const compareRows = [
-  { item: '수업 전 확인', left: '그날의 컨디션 위주로 진행', right: '직전 수업 기록과 몸 상태를 함께 확인' },
-  { item: '운동 계획', left: '정해진 프로그램을 그대로 진행', right: '기록을 바탕으로 회원별 계획을 조정' },
-  { item: '수업 기록', left: '수업 중 구두로 안내', right: '종목·중량·횟수·세트를 기록으로 남김' },
-  { item: '회원 피드백', left: '수업이 끝나면 종료', right: '몸 상태와 강도 체감을 기록해 다음 수업에 반영' },
-  { item: '다음 수업 준비', left: '다음 수업에서 다시 확인', right: '직전 기록을 기준으로 미리 준비' },
-  { item: '회원의 기록 확인', left: '별도로 확인하기 어려움', right: '회원 전용 앱에서 언제든 확인 가능' },
+  { item: '수업 전', left: '그날의 컨디션 위주로 확인', right: '직전 수업 기록과 몸 상태를 함께 확인' },
+  { item: '수업 중', left: '정해진 프로그램을 그대로 진행', right: '기록을 바탕으로 종목과 강도를 조정' },
+  { item: '수업 후', left: '수업이 끝나면 종료', right: '몸 상태와 강도 체감을 기록으로 남김' },
+  { item: '다음 수업', left: '다음 수업에서 다시 확인', right: '직전 기록을 기준으로 미리 준비' },
+  { item: '회원 확인', left: '별도로 확인하기 어려움', right: '회원 전용 앱에서 언제든 확인 가능' },
 ];
 
 const forWhom = ['PT를 처음 시작하는 분', '이전에 운동을 배웠지만 혼자 하면 방향을 잃는 분', '매번 같은 운동이 반복되는 것이 아쉬웠던 분', '자신의 운동 과정을 기록으로 확인하고 싶은 분', '다이어트와 근력 향상을 함께 관리하고 싶은 분', '운동 자세와 움직임을 세심하게 배우고 싶은 분'];
@@ -104,7 +103,6 @@ export default function Page() {
   return <main>
     <JsonLd data={breadcrumbSchema([{ name: '홈', path: '/' }, { name: 'PT 시스템', path: pageMeta.system.path }])} />
     <JsonLd data={faqSchema(faqs.system)} />
-    <JsonLd data={personSchema({ name: '김태오', jobTitle: '대표', path: '/about/' })} />
 
     <PageHero
       crumb="PT 시스템"
@@ -166,8 +164,9 @@ export default function Page() {
 
     {/* A. 일반적인 PT 진행과 테오짐 시스템의 차이 */}
     <Section tone="sand">
-      <SectionTitle eyebrow="Compare" title="매 수업 단위의 진행과, 기록으로 연결되는 테오짐 관리" desc="어느 쪽이 더 낫다는 비교가 아니라, 테오짐이 운영하는 방식을 항목별로 정리했습니다." />
-      <div className="mt-10"><Reveal><CompareTable leftLabel="매 수업 단위의 진행" rightLabel="기록으로 연결되는 테오짐 관리" rows={compareRows} /></Reveal></div>
+      <SectionTitle eyebrow="Compare" title="수업 단위로 확인할 때와, 기록으로 연결해 관리할 때" desc="어느 쪽이 더 낫다는 비교가 아니라, 테오짐이 운영하는 방식을 항목별로 정리했습니다." />
+      <div className="mt-10"><Reveal><CompareTable leftLabel="수업 단위로 확인할 때" rightLabel="기록으로 연결해 관리할 때" rows={compareRows} /></Reveal></div>
+      <p className="mt-6 max-w-3xl text-sm leading-7 text-ink-soft">테오짐의 차이는 특별해 보이는 운동을 만드는 것이 아니라, 상담과 수업, 기록과 피드백이 끊기지 않도록 연결하는 데 있습니다.</p>
     </Section>
 
     {/* B. 이런 분에게 잘 맞습니다 */}
