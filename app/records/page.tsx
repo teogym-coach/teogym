@@ -134,7 +134,6 @@ export default function Page() {
       desc="현재 운동 상태와 목표를 확인한 뒤, 어떤 방식으로 수업을 기록하고 관리하는지 상담에서 직접 설명드립니다."
       buttons={[
         { label: '상담 예약하기', href: site.links.reservation, variant: 'primary' },
-        { label: '네이버에서 상담 예약하기', href: site.links.reservation, variant: 'outline' },
         { label: '테오짐 PT 시스템 보기', href: '/system/', variant: 'outline' },
       ]}
     />
