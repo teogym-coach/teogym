@@ -9,6 +9,8 @@ export const BING_SITE_VERIFICATION = 'E8A9918482E1CA0F06BB325DAB1C7D36';
 
 export const NAVER_SITE_VERIFICATION = '3176213ef9af725cf2f0c73eb3ed9d3ef8fbe2d1';
 
+export const GA_MEASUREMENT_ID = 'G-V623GX238L';
+
 export function makeMetadata(meta: { title: string; description: string; path: string }): Metadata {
   const url = new URL(meta.path, site.url).toString();
   const otherVerification: Record<string, string> = { 'msvalidate.01': BING_SITE_VERIFICATION };

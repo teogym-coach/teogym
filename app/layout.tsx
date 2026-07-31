@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { Footer, JsonLd } from './components';
 import { pageMeta, site } from './content';
-import { makeMetadata } from './seo';
+import { GA_MEASUREMENT_ID, makeMetadata } from './seo';
 import { SiteHeader } from './ui';
 
 export const metadata: Metadata = {
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <SiteHeader />
       {children}
       <Footer />
+      <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </body>
   </html>;
 }
