@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps, TextLink } from './components';
+import { Button, Card, CTA, FaqList, JsonLd, Photo, RelatedLinks, Section, SectionTitle, Steps } from './components';
 import { faqs, mockups, photos, site } from './content';
 import { faqSchema } from './schema';
 import { MockupCarousel, Reveal } from './ui';
@@ -27,6 +27,13 @@ const process = [
   { icon: 'target', title: '방향 설계', desc: '몸 상태와 목표에 맞는 운동 방향과 관리 계획을 안내합니다.' },
   { icon: 'dumbbell', title: '1:1 수업', desc: '대표가 직접 수업하고 매 수업의 수행 내용을 기록합니다.' },
   { icon: 'trend', title: '기록과 피드백', desc: '운동기록과 체중 변화를 회원 전용 앱에서 함께 확인합니다.' },
+];
+
+const whyTeoGym = [
+  { title: '상태 확인', desc: '운동 경험과 목표, 움직임과 불편한 부분을 확인합니다.' },
+  { title: '50분 PT', desc: '김태오 대표가 직접 수업하며 그날의 수행을 확인합니다.' },
+  { title: '운동 기록', desc: '종목, 중량, 횟수, 세트 등 다음 운동에 필요한 내용을 기록합니다.' },
+  { title: '다음 운동으로 연결', desc: '기록을 다음 PT와 개인운동에 반영합니다.' },
 ];
 
 const caseCategories = ['다이어트 변화 사례', '체형교정 사례', '벌크업 사례', '운동기록 관리 사례', '회원 전용 앱 활용 사례'];
@@ -74,7 +81,7 @@ export default function Home() {
           <Reveal>
             <h1 className="max-w-[560px] text-4xl font-extrabold leading-[1.28] tracking-tight text-white md:max-w-[680px] md:text-6xl md:leading-[1.3] lg:text-7xl">기록이 만든 변화,<br /><span className="text-accent">테오짐</span>의 기준입니다</h1>
             <p className="mt-6 text-lg font-medium text-white md:mt-8">체형교정 · 다이어트 · 벌크업</p>
-            <p className="mt-4 max-w-[460px] text-base leading-7 text-mist">테오짐 PT 청라점은 김태오 대표가 상담과 수업을 직접 진행합니다.<br />움직임을 확인하고 운동기록을 남겨 다음 수업을 준비합니다.</p>
+            <p className="mt-4 max-w-[460px] text-base leading-7 text-mist">김태오 대표가 상담부터 PT까지 직접 진행합니다.<br />현재 상태를 확인하고 매 수업의 기록을 다음 운동에 연결합니다.</p>
           </Reveal>
           <Reveal delay={150}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row md:mt-10">
@@ -137,22 +144,20 @@ export default function Home() {
       <div className="mt-10"><Reveal><Steps items={process} /></Reveal></div>
     </Section>
 
-    {/* 운동기록/PT 시스템 페이지로 연결하는 2카드 섹션 */}
+    {/* 테오짐 PT 차별점 — WHY TEO GYM */}
     <Section tone="sand">
-      <SectionTitle eyebrow="System" title="테오짐의 수업은 기록으로 이어집니다" />
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        <Reveal>
-          <Card title="왜 모든 수업을 기록할까요?" href="/records/" ctaLabel="운동기록 관리 보기 →">
-            운동 내용과 회원 반응을 기록하고, 이전 수업과 비교해 다음 수업을 준비합니다.
-          </Card>
-        </Reveal>
-        <Reveal delay={100}>
-          <Card title="상담부터 다음 수업까지" href="/system/" ctaLabel="테오짐 PT 시스템 보기 →">
-            상담, 움직임 평가, 목표 설정, 수업, 피드백이 하나의 과정으로 연결됩니다.
-          </Card>
-        </Reveal>
-      </div>
-      <p className="mt-6 text-center text-sm"><TextLink href="/about/">김태오 대표의 수업 원칙 보기 →</TextLink></p>
+      <SectionTitle eyebrow="WHY TEO GYM" title="테오짐 PT는 무엇이 다를까요?" />
+      <Reveal>
+        <p className="mt-5 max-w-3xl text-lg font-extrabold leading-8 text-ink md:text-xl">PT를 받는 50분만 관리하지 않습니다.</p>
+        <p className="mt-3 max-w-3xl leading-8 text-ink-soft">수업 전 현재 상태를 확인하고,<br />수업에서는 수행 내용을 기록하고,<br />그 기록을 다음 수업과 개인운동에 연결합니다.</p>
+      </Reveal>
+      <div className="mt-10"><Reveal><Steps items={whyTeoGym} /></Reveal></div>
+      <Reveal delay={100}>
+        <div className="mt-8 rounded-2xl border border-accent/25 bg-card p-6 text-center shadow-card md:p-8">
+          <p className="text-lg font-bold leading-8 text-ink md:text-xl">매번 새로 시작하는 PT가 아니라,<br />지난 수업 위에 다음 수업이 쌓입니다.</p>
+        </div>
+      </Reveal>
+      <div className="mt-8 flex justify-center"><Button href="/system/">테오짐 PT 시스템 보기 →</Button></div>
     </Section>
 
     {/* 대표 직접 상담 전환 카드 */}
